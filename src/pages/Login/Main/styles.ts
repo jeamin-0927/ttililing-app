@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import colors, { opacity } from "@/utils/colors";
+import fonts from "@/utils/fonts";
 
 const styles = StyleSheet.create({
   background: {
@@ -32,11 +33,11 @@ const styles = StyleSheet.create({
     color: colors.gray000,
     fontSize: 22,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontFamily: fonts(600),
   },
   titleText: {
+    fontFamily: fonts(900),
     fontSize: 100,
-    fontWeight: "900",
   },
   bottom: {
     display: "flex",
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 12,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontFamily: fonts(600),
   },
   kakao: {
     display: "flex",
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontFamily: fonts(600),
   },
   terms: {
     display: "flex",

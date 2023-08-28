@@ -26,7 +26,7 @@ const TtililingText = ({ show = true }: { show?: boolean; }) => (
     end={{ x: 1, y: 0 }}
     style={{
       ...styles.titleText,
-      opacity: show ? 1 : 0
+      opacity: show ? 1 : 0,
     }}
   >띠리링</GradientText>
 );

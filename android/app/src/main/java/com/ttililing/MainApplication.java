@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 import com.lugg.RNCConfig.RNCConfigPackage;
+import com.facebook.react.views.text.ReactFontManager;
 
 public class MainApplication extends Application implements ReactApplication {
 
