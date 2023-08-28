@@ -1,10 +1,1 @@
-//
-//  Config.xcconfig
-//  ttililing
-//
-//  Created by 최재민 on 8/28/23.
-//
-
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
 #include? "tmp.xcconfig"

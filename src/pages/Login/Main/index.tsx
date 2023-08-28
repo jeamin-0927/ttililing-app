@@ -1,5 +1,6 @@
 import { BlurView } from "@react-native-community/blur";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { getProfile, login, loginWithKakaoAccount } from "@react-native-seoul/kakao-login";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
@@ -33,6 +34,13 @@ const TtililingText = ({ show = true }: { show?: boolean; }) => (
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
+
+  const login2 = async () => {
+    const loginData = await login();
+    const getProfile2 = await getProfile();
+    console.log("login2", loginData, getProfile2);
+  };
+
   return (
     <View style={styles.background}>
       <SafeAreaView style={styles.container}>
@@ -64,7 +72,7 @@ const Main = ({ navigation }: props) => {
         </View>
 
         <View style={styles.bottom}>
-          <TouchableOpacity style={styles.kakao}>
+          <TouchableOpacity style={styles.kakao} onPress={login2}>
             <KakaoIcon width={24} height={24} />
             <Text style={styles.kakaoText}>카카오로 시작하기</Text>
             <View style={{ width: 24 }} />
