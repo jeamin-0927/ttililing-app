@@ -1,15 +1,14 @@
-import React from "react";
-import { RecoilRoot } from "recoil";
 
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { RecoilRoot } from "recoil";
 
 import colors from "@/utils/colors";
 
-import { StackParamList } from "./types";
-
 import Home from "./Home";
 import Login from "./Login";
+import { StackParamList } from "./types";
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -17,7 +16,7 @@ export const rootTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: colors.white,
+    background: colors.gray000,
   }
 };
 

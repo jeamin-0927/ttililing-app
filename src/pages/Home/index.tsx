@@ -1,11 +1,11 @@
 import { NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { View } from "react-native";
 
 import { StackParamList as ParentsStackParamList } from "../types";
-import { StackParamList } from "./types";
 
-import { View } from "react-native";
 import Main from "./Main";
+import { StackParamList } from "./types";
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Home">;
 const Stack = createNativeStackNavigator<StackParamList>();
