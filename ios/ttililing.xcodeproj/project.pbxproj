@@ -12,8 +12,17 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		23D496A9A8884DA88E46FD20 /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D68D03F384E4402595EBBC3E /* SUIT-Regular.ttf */; };
+		28D59A7DACE041EEB6A10F63 /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F37FF03DC6214929B422425B /* SUIT-Bold.ttf */; };
+		39CD06803E8340BC85D1FBD9 /* SUIT-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941616928F374A1E936F870E /* SUIT-Heavy.ttf */; };
+		6277059851564492B9C9DD3A /* SUIT-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B84D3C78BB4033802A3A67 /* SUIT-ExtraBold.ttf */; };
+		6D01C185F9B747B8A4CDDACC /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB84C5F579C14D26A68D4C05 /* SUIT-Medium.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-ttililing-ttililingTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ttililing-ttililingTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B88E4FCCA76C40E7B714C92B /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4EA44EB3A7A4F658D365080 /* SUIT-Thin.ttf */; };
+		C8643526869E487B82AC7C7C /* SUIT-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC90005F98724F2BB2C286B1 /* SUIT-ExtraLight.ttf */; };
+		D44F7869F14144CC91F6679D /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95F35510FC2644BAB01B8149 /* SUIT-Light.ttf */; };
+		E7BB4B937B484921B3ED515B /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1099AF7C949043F2870A9916 /* SUIT-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +39,7 @@
 		00E356EE1AD99517003FC87E /* ttililingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ttililingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ttililingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ttililingTests.m; sourceTree = "<group>"; };
+		1099AF7C949043F2870A9916 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-SemiBold.ttf"; path = "../src/assets/fonts/SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ttililing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ttililing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ttililing/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ttililing/AppDelegate.mm; sourceTree = "<group>"; };
@@ -37,6 +47,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ttililing/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ttililing/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ttililing-ttililingTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ttililing-ttililingTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34B84D3C78BB4033802A3A67 /* SUIT-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-ExtraBold.ttf"; path = "../src/assets/fonts/SUIT-ExtraBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ttililing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttililing.debug.xcconfig"; path = "Target Support Files/Pods-ttililing/Pods-ttililing.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ttililing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttililing.release.xcconfig"; path = "Target Support Files/Pods-ttililing/Pods-ttililing.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ttililing-ttililingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttililing-ttililingTests.debug.xcconfig"; path = "Target Support Files/Pods-ttililing-ttililingTests/Pods-ttililing-ttililingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -44,7 +55,14 @@
 		8018B5622A9C1508001B1C3C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ttililing/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-ttililing-ttililingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttililing-ttililingTests.release.xcconfig"; path = "Target Support Files/Pods-ttililing-ttililingTests/Pods-ttililing-ttililingTests.release.xcconfig"; sourceTree = "<group>"; };
+		941616928F374A1E936F870E /* SUIT-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Heavy.ttf"; path = "../src/assets/fonts/SUIT-Heavy.ttf"; sourceTree = "<group>"; };
+		95F35510FC2644BAB01B8149 /* SUIT-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Light.ttf"; path = "../src/assets/fonts/SUIT-Light.ttf"; sourceTree = "<group>"; };
+		AB84C5F579C14D26A68D4C05 /* SUIT-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Medium.ttf"; path = "../src/assets/fonts/SUIT-Medium.ttf"; sourceTree = "<group>"; };
+		BC90005F98724F2BB2C286B1 /* SUIT-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-ExtraLight.ttf"; path = "../src/assets/fonts/SUIT-ExtraLight.ttf"; sourceTree = "<group>"; };
+		D68D03F384E4402595EBBC3E /* SUIT-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Regular.ttf"; path = "../src/assets/fonts/SUIT-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F37FF03DC6214929B422425B /* SUIT-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Bold.ttf"; path = "../src/assets/fonts/SUIT-Bold.ttf"; sourceTree = "<group>"; };
+		F4EA44EB3A7A4F658D365080 /* SUIT-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SUIT-Thin.ttf"; path = "../src/assets/fonts/SUIT-Thin.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +142,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				F29D74CF882A4325BCE73F88 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +167,23 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-ttililing-ttililingTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F29D74CF882A4325BCE73F88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F37FF03DC6214929B422425B /* SUIT-Bold.ttf */,
+				34B84D3C78BB4033802A3A67 /* SUIT-ExtraBold.ttf */,
+				BC90005F98724F2BB2C286B1 /* SUIT-ExtraLight.ttf */,
+				941616928F374A1E936F870E /* SUIT-Heavy.ttf */,
+				95F35510FC2644BAB01B8149 /* SUIT-Light.ttf */,
+				AB84C5F579C14D26A68D4C05 /* SUIT-Medium.ttf */,
+				D68D03F384E4402595EBBC3E /* SUIT-Regular.ttf */,
+				1099AF7C949043F2870A9916 /* SUIT-SemiBold.ttf */,
+				F4EA44EB3A7A4F658D365080 /* SUIT-Thin.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +282,15 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				28D59A7DACE041EEB6A10F63 /* SUIT-Bold.ttf in Resources */,
+				6277059851564492B9C9DD3A /* SUIT-ExtraBold.ttf in Resources */,
+				C8643526869E487B82AC7C7C /* SUIT-ExtraLight.ttf in Resources */,
+				39CD06803E8340BC85D1FBD9 /* SUIT-Heavy.ttf in Resources */,
+				D44F7869F14144CC91F6679D /* SUIT-Light.ttf in Resources */,
+				6D01C185F9B747B8A4CDDACC /* SUIT-Medium.ttf in Resources */,
+				23D496A9A8884DA88E46FD20 /* SUIT-Regular.ttf in Resources */,
+				E7BB4B937B484921B3ED515B /* SUIT-SemiBold.ttf in Resources */,
+				B88E4FCCA76C40E7B714C92B /* SUIT-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
