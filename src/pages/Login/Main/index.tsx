@@ -1,6 +1,6 @@
 import { BlurView } from "@react-native-community/blur";
 import MaskedView from "@react-native-masked-view/masked-view";
-import { login, loginWithKakaoAccount } from "@react-native-seoul/kakao-login";
+import { getProfile, login, loginWithKakaoAccount } from "@react-native-seoul/kakao-login";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
@@ -37,7 +37,8 @@ const Main = ({ navigation }: props) => {
 
   const login2 = async () => {
     const loginData = await login();
-    console.log(loginData);
+    const getProfile2 = await getProfile();
+    console.log("login2", loginData, getProfile2);
   };
 
   return (
