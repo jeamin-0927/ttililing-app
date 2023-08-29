@@ -10,6 +10,8 @@ import { tokenAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
+import styles from "./styles";
+
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
   const setTokens = useSetRecoilState(tokenAtom);
@@ -29,7 +31,7 @@ const Main = ({ navigation }: props) => {
   };
 
   return (
-    <SafeAreaView style={{ width: "100%", height: "100%" }}>
+    <SafeAreaView style={styles.SafeAreaView}>
       <Text>Record/Main/index.tsx</Text>
 
       <TouchableOpacity onPress={onPress}>

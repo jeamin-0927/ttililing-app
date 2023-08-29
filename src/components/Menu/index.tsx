@@ -1,4 +1,3 @@
-import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 
@@ -10,11 +9,11 @@ import Icon_Nofill_All from "@/assets/icons/menu/nofill/all.svg";
 import Icon_Nofill_Call from "@/assets/icons/menu/nofill/call.svg";
 import Icon_Nofill_Home from "@/assets/icons/menu/nofill/home.svg";
 import Icon_Nofill_Record from "@/assets/icons/menu/nofill/record.svg";
-import { StackParamList, StackString } from "@/pages/types";
 
 import Text from "../Text";
 
 import styles from "./styles";
+import { Props } from "./types";
 
 const menuList = [
   {
@@ -51,11 +50,7 @@ const menuList = [
   }
 ];
 
-const Menu = ({ navigation, now }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigation: any;
-  now: string;
-}) => {
+const Menu = ({ navigation, now }: Props) => {
   const selected = menuList.findIndex(menu => menu.path === now);
   return (
     <View style={styles.menu}>

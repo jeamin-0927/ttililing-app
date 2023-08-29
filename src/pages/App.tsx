@@ -50,7 +50,7 @@ const App = () => {
         screenOptions={{
           headerShown: false,
           animation: "fade",
-          animationDuration: 200,
+          animationDuration: 100,
         }}
       >
         <Stack.Group>

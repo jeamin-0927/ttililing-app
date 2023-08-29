@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { SafeAreaView, TouchableOpacity } from "react-native";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import { useSetRecoilState } from "recoil";
 
 import Menu from "@/components/Menu";
@@ -9,6 +9,8 @@ import Text from "@/components/Text";
 import { tokenAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
+
+import styles from "./styles";
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
@@ -29,7 +31,7 @@ const Main = ({ navigation }: props) => {
   };
 
   return (
-    <SafeAreaView style={{ width: "100%", height: "100%" }}>
+    <SafeAreaView style={styles.SafeAreaView}>
       <Text>All/Main/index.tsx</Text>
 
       <TouchableOpacity onPress={onPress}>
