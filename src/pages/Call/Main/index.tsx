@@ -30,13 +30,13 @@ const Main = ({ navigation }: props) => {
 
   return (
     <SafeAreaView style={{ width: "100%", height: "100%" }}>
-      <Text>Home/Main/index.tsx</Text>
+      <Text>Call/Main/index.tsx</Text>
 
       <TouchableOpacity onPress={onPress}>
         <Text>Go to Login</Text>
       </TouchableOpacity>
 
-      <Menu navigation={navigation} now="Home" />
+      <Menu navigation={navigation} now="Call" />
     </SafeAreaView>
   );
 };

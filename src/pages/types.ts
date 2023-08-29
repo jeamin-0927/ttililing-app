@@ -3,6 +3,10 @@ import { props as ConfirmModalProps } from "@/components/Modals/ConfirmModal/typ
 
 export type StackParamList = {
 	Home: undefined;
+	Call: undefined;
+	Record: undefined;
+	All: undefined;
+
 	Login: undefined;
 	Alert: AlertModalProps;
 	Confirm: ConfirmModalProps;

@@ -10,8 +10,11 @@ import { AlertModal, ConfirmModal } from "@/components/Modals";
 import colors from "@/utils/colors";
 import { isLoginSelector, tokenAtom } from "@/utils/states";
 
+import All from "./All";
+import Call from "./Call";
 import Home from "./Home";
 import Login from "./Login";
+import Record from "./Record";
 import { StackParamList } from "./types";
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -53,7 +56,12 @@ const App = () => {
         <Stack.Group>
           {
             isLogin ? (
-              <Stack.Screen name="Home" component={Home} />
+              <>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Call" component={Call} />
+                <Stack.Screen name="Record" component={Record} />
+                <Stack.Screen name="All" component={All} />
+              </>
             ) : (
               <Stack.Screen name="Login" component={Login} />
             )
