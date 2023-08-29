@@ -60,6 +60,7 @@ const Menu = ({ navigation, now }: Props) => {
             style={styles.menuItem} 
             key={index}
             onPress={() => navigation.navigate(menu.path)}
+            hitSlop={{ top: 10, bottom: 10, left: 20, right: 20 }}
           >
             { selected === index ? <menu.icon.fill /> : <menu.icon.nofill /> }
             <Text style={[
