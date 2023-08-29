@@ -1,0 +1,12 @@
+{
+  "background": "#FEFEFF",
+  "logo": {
+    "width": 200,
+    "height": 200
+  },
+  "brand": {
+    "bottom": 85.5,
+    "width": 100,
+    "height": 29
+  }
+}
