@@ -5,7 +5,7 @@ import fonts from "@/utils/fonts";
 
 export default StyleSheet.create({
   background: {
-    width: "100%",
+    width: "200%",
     height: "100%",
     position: "absolute",
   },
