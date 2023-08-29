@@ -1,27 +1,29 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BlurView } from "@react-native-community/blur";
 import MaskedView from "@react-native-masked-view/masked-view";
-import { getProfile, login, loginWithKakaoAccount } from "@react-native-seoul/kakao-login";
+import { login } from "@react-native-seoul/kakao-login";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { useSetRecoilState } from "recoil";
 
 import KakaoIcon from "@/assets/icons/kakao.svg";
 import Lines from "@/assets/images/line.svg";
 import GradientText from "@/components/GradientText";
 import Text from "@/components/Text";
 import colors, { opacity } from "@/utils/colors";
+import { tokenAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
 import styles from "./styles";
 
-
 const TtililingText = ({ show = true }: { show?: boolean; }) => (
   <GradientText 
     colors={[
-      opacity(colors.gray000, .5),
-      opacity(colors.gray000, .1)
+      opacity(colors.gray000, .8),
+      opacity(colors.gray000, .5)
     ]}
     start={{ x: 0, y: 0 }}
     end={{ x: 1, y: 0 }}
@@ -34,11 +36,15 @@ const TtililingText = ({ show = true }: { show?: boolean; }) => (
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
+  const setTokens = useSetRecoilState(tokenAtom);
 
-  const login2 = async () => {
+  const onPress = async () => {
     const loginData = await login();
-    const getProfile2 = await getProfile();
-    console.log("login2", loginData, getProfile2);
+    const { accessToken, refreshToken } = loginData;
+    await AsyncStorage.setItem("accessToken", accessToken);
+    await AsyncStorage.setItem("refreshToken", refreshToken);
+    setTokens({ accessToken, refreshToken });
+    console.log("login2", accessToken, refreshToken);
   };
 
   return (
@@ -50,7 +56,7 @@ const Main = ({ navigation }: props) => {
             <View style={styles.titleInner}>
               <Text style={styles.titleContext}>전화 공포증 극복 플랫폼</Text>
               <MaskedView maskElement={<TtililingText />}>
-                <BlurView overlayColor="transparent">
+                <BlurView blurAmount={100} blurRadius={1} overlayColor="transparent">
                   <TtililingText show={true}/>
                 </BlurView>
               </MaskedView>
@@ -72,7 +78,7 @@ const Main = ({ navigation }: props) => {
         </View>
 
         <View style={styles.bottom}>
-          <TouchableOpacity style={styles.kakao} onPress={login2}>
+          <TouchableOpacity style={styles.kakao} onPress={onPress}>
             <KakaoIcon width={24} height={24} />
             <Text style={styles.kakaoText}>카카오로 시작하기</Text>
             <View style={{ width: 24 }} />
