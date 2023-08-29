@@ -6,6 +6,7 @@ import React from "react";
 import BootSplash from "react-native-bootsplash";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import { AlertModal, ConfirmModal } from "@/components/Modals";
 import colors from "@/utils/colors";
 import { isLoginSelector, tokenAtom } from "@/utils/states";
 
@@ -50,7 +51,6 @@ const App = () => {
         }}
       >
         <Stack.Group>
-          {/* <Stack.Screen name="Home" component={Home} /> */}
           {
             isLogin ? (
               <Stack.Screen name="Home" component={Home} />
@@ -58,6 +58,15 @@ const App = () => {
               <Stack.Screen name="Login" component={Login} />
             )
           }
+        </Stack.Group>
+        <Stack.Group screenOptions={{ 
+          presentation: "transparentModal",
+          animation: "fade",
+          animationDuration: 100,
+          contentStyle: { backgroundColor: "transparent" },
+        }}>
+          <Stack.Screen name="Alert" component={AlertModal} />
+          <Stack.Screen name="Confirm" component={ConfirmModal} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
