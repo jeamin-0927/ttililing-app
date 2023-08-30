@@ -1,7 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Animated, TouchableOpacity, View } from "react-native";
-import { opacity } from "react-native-reanimated";
 
 import Icon_NoSelected_Help from "@/assets/icons/received/noSelected/help.svg";
 import Icon_NoSelected_Record from "@/assets/icons/received/noSelected/record.svg";

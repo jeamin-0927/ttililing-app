@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import colors, { opacity } from "@/utils/colors";
-import fonts from "@/utils/fonts";
+import colors from "@/utils/colors";
 
 const styles = StyleSheet.create({
   image: {

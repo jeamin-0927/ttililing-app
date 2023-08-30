@@ -44,7 +44,6 @@ const Main = ({ navigation }: props) => {
     await AsyncStorage.setItem("accessToken", accessToken);
     await AsyncStorage.setItem("refreshToken", refreshToken);
     setTokens({ accessToken, refreshToken });
-    console.log("login2", accessToken, refreshToken);
   };
 
   return (

@@ -15,7 +15,6 @@ const Chat = ({
   children: string | string[];
   border?: boolean;
 }) => {
-  console.log("Chat");
   return (
     <View style={{
       ...styles.chat,
