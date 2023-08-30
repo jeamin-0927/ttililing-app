@@ -98,6 +98,9 @@ const styles = StyleSheet.create({
     fontFamily: fonts(600),
     fontSize: 14,
     fontStyle: "normal",
+    display: "flex",
+    alignItems: "center",
+    textAlign: "center",
   },
   chat: {
     width: "100%",
