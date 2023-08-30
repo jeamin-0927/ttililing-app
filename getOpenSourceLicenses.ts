@@ -2,6 +2,7 @@ import {promises as fs} from 'fs';
 
 const getOpenSourceLicenses = async () => {
   const folder = await fs.readdir('./node_modules');
+  const dependencies = JSON.parse(await fs.readFile('./package.json', 'utf-8')).dependencies;
   const licenses: {
     license: string;
     name: string;
@@ -19,21 +20,23 @@ const getOpenSourceLicenses = async () => {
           license, 
           name,
           description,
-          homepage
+          repository
         }: {
           license: string;
           name: string;
           description: string;
-          homepage: string;
+          repository: string | {
+            url: string;
+          };
         } = JSON.parse(packageJson);
-        licenses.push({
-          license,
-          name,
-          description,
-          homepage: homepage || ""
-        });
-        if(!license) {
-          // console.log(name);
+        if(dependencies[name]) {
+          const url = typeof repository === 'string' ? repository : repository.url;
+          licenses.push({
+            license,
+            name,
+            description,
+            homepage: url || ""
+          });
         }
       }
       continue;
@@ -44,21 +47,23 @@ const getOpenSourceLicenses = async () => {
         license, 
         name,
         description,
-        homepage
+        repository
       }: {
         license: string;
         name: string;
         description: string;
-        homepage: string;
+        repository: string | {
+          url: string;
+        };
       } = JSON.parse(packageJson);
-      licenses.push({
-        license,
-        name,
-        description,
-        homepage: homepage || ""
-      });
-      if(!license) {
-        // console.log(name);
+      if(dependencies[name]) {
+        const url = typeof repository === 'string' ? repository : repository.url;
+        licenses.push({
+          license,
+          name,
+          description,
+          homepage: url || ""
+        });
       }
     }
     catch(e) {

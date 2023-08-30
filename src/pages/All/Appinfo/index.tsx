@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
 
-import packageJson from "@/../package.json";
+import { version } from "@/../package.json";
 import Icon_Logo from "@/assets/icons/logo.svg";
 import Icon_Prev from "@/assets/icons/prev.svg";
 import Text from "@/components/Text";
@@ -36,7 +36,7 @@ const Appinfo = ({ navigation }: props) => {
       </View>
 
       <View style={styles.bottom}>
-        <Text style={styles.version}>앱 버전 {packageJson.version}</Text>
+        <Text style={styles.version}>앱 버전 {version}</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate("OpenSource")}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}

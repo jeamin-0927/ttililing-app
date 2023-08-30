@@ -21,11 +21,14 @@ const AlertModal = ({ route, navigation }: props) => {
           {context && <Text style={styles.context}>{context}</Text>}
         </View>
         <View style={styles.buttons}>
-          <TouchableOpacity onPress={async () => {
-            if (onBeforeClose) await onBeforeClose();
-            close();
-            if(onClose) await onClose();
-          }}>
+          <TouchableOpacity 
+            onPress={async () => {
+              if (onBeforeClose) await onBeforeClose();
+              close();
+              if(onClose) await onClose();
+            }}
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          >
             <Text style={styles.confirm}>{buttonText}</Text>
           </TouchableOpacity>
         </View>
