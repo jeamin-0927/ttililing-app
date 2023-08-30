@@ -89,6 +89,10 @@ const Received = ({ navigation }: props) => {
     }
   }, [ClickBtn.record, ClickBtn.help]);
 
+  const hangup = () => {
+    navigation.replace("Record");
+  };
+
   return (
     <CallView navigation={navigation}>
       <View style={styles.top}>
@@ -132,7 +136,7 @@ const Received = ({ navigation }: props) => {
             ))
           }
         </View>
-        <TouchableOpacity style={styles.close}>
+        <TouchableOpacity style={styles.close} onPress={hangup}>
           <Icon_RingWhite style={styles.endIcon} />
         </TouchableOpacity>
       </View>
