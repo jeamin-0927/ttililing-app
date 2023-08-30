@@ -1,12 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { SafeAreaView, TouchableOpacity } from "react-native";
+import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import { useSetRecoilState } from "recoil";
 
+import Icon_New from "@/assets/icons/new.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
 import { tokenAtom } from "@/utils/states";
+
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -38,6 +40,13 @@ const Main = ({ navigation }: props) => {
         <Text>Go to Login</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity 
+        style={styles.new}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        onPress={() => navigation.navigate("Calling")}
+      >
+        <Icon_New />
+      </TouchableOpacity>
       <Menu navigation={navigation} now="Call" />
     </SafeAreaView>
   );

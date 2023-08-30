@@ -3,7 +3,9 @@ import React from "react";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
+import Calling from "./Calling";
 import Main from "./Main";
+import Received from "./Received";
 import { StackParamList } from "./types";
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Call">;
@@ -20,13 +22,14 @@ const Call = ({ navigation }: props) => {
       }}>
       <Stack.Group>
         <Stack.Screen name="Main" component={Main} />
-
+        <Stack.Screen name="Calling" component={Calling} />
       </Stack.Group>
       <Stack.Group screenOptions={{
         headerShown: false,
         animation: "fade",
         animationDuration: 100,
       }}>
+        <Stack.Screen name="Received" component={Received} />
       </Stack.Group>
     </Stack.Navigator>
   );

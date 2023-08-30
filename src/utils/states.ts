@@ -18,3 +18,11 @@ export const isLoginSelector = selector({
     return !!accessToken && !!refreshToken;
   }
 });
+
+export const SizeAtom = atom({
+  key: "size",
+  default: {
+    width: 0,
+    height: 0
+  }
+});

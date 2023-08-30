@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { Platform, StatusBar } from "react-native";
 import BootSplash from "react-native-bootsplash";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -30,6 +31,18 @@ export const rootTheme = {
 const App = () => {
   const setTokens = useSetRecoilState(tokenAtom);
   const isLogin = useRecoilValue(isLoginSelector);
+
+  React.useEffect(() => {
+    if(Platform.OS !== "android") return;
+    if(isLogin) {
+      StatusBar.setBackgroundColor(colors.gray000);
+      StatusBar.setBarStyle("dark-content");
+    }
+    else {
+      StatusBar.setBackgroundColor(colors.gray900);
+      StatusBar.setBarStyle("light-content");
+    }
+  }, [isLogin]);
 
   React.useEffect(() => {
     const init = async () => {
