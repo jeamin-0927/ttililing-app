@@ -4,6 +4,11 @@ import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
 import { useSetRecoilState } from "recoil";
 
+import Icon_Foward from "@/assets/icons/foward.svg";
+import Icon_Logout from "@/assets/icons/logout.svg";
+import Icon_Myinfo from "@/assets/icons/myinfo.svg";
+import Icon_Settings from "@/assets/icons/settings.svg";
+import Icon_Support from "@/assets/icons/support.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
 import { tokenAtom } from "@/utils/states";
@@ -16,10 +21,10 @@ type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
   const setTokens = useSetRecoilState(tokenAtom);
 
-  const onPress = async () => {
+  const Logout = async () => {
     navigation.navigate("Confirm", {
       title: "로그아웃 하시겠습니까?",
-      context: "로그아웃 시, 저장된 토큰이 삭제됩니다.",
+      context: "다시 로그인을 해야합니다.",
       confirmButtonText: "확인",
       cancelButtonText: "취소",
       onConfirm: async () => {
@@ -30,16 +35,65 @@ const Main = ({ navigation }: props) => {
     });
   };
 
+  const menus = [
+    {
+      type: "btn",
+      name: "내 정보",
+      icon: <Icon_Myinfo />
+    },
+    {
+      type: "btn",
+      name: "띠리링 설정",
+      icon: <Icon_Settings />
+    },
+    {
+      type: "btn",
+      name: "띠리링 어플리케이션 정보",
+      icon: <Icon_Support />,
+      onPress: () => navigation.navigate("Appinfo")
+    },
+    {
+      type: "line",
+    },
+    {
+      type: "btn",
+      name: "로그아웃",
+      icon: <Icon_Logout />,
+      onPress: Logout
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <Text>All/Main/index.tsx</Text>
+      <View style={styles.title}>
+        <Text style={styles.titleText}>전체</Text>
+      </View>
 
-      <TouchableOpacity onPress={onPress}>
-        <Text>Go to Login</Text>
-      </TouchableOpacity>
+      {
+        menus.map((menu, index) => {
+          if(menu.type === "btn") return (
+            <TouchableOpacity
+              style={styles.item}
+              hitSlop={{ top: 12, bottom: 12, left: 10, right: 10 }}
+              onPress={menu?.onPress}
+              key={index}
+            >
+              <View style={styles.itemLeft}>
+                <View style={styles.itemIcon}>
+                  {menu?.icon}
+                </View>
+                <Text style={styles.itemText}>{menu?.name}</Text>
+              </View>
+              <Icon_Foward />
+            </TouchableOpacity>
+          );
+          else if(menu.type === "line") return (
+            <View style={styles.line} key={index} />
+          );
+        })
+      }
 
       <Menu navigation={navigation} now="All" />
-
     </SafeAreaView>
   );
 };

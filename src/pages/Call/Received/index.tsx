@@ -90,7 +90,15 @@ const Received = ({ navigation }: props) => {
   }, [ClickBtn.record, ClickBtn.help]);
 
   const hangup = () => {
-    navigation.replace("Record");
+    navigation.navigate("Confirm", {
+      title: "전화를 종료하시겠습니까?",
+      context: "기록 화면으로 전환됩니다!",
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+      onConfirm: () => {
+        navigation.replace("Record");
+      }
+    });
   };
 
   return (

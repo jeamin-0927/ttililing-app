@@ -3,7 +3,9 @@ import React from "react";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
+import Appinfo from "./Appinfo";
 import Main from "./Main";
+import OpenSource from "./OpenSource";
 import { StackParamList } from "./types";
 
 type props = NativeStackScreenProps<ParentsStackParamList, "All">;
@@ -20,13 +22,14 @@ const All = ({ navigation }: props) => {
       }}>
       <Stack.Group>
         <Stack.Screen name="Main" component={Main} />
-
+        <Stack.Screen name="Appinfo" component={Appinfo} />
       </Stack.Group>
       <Stack.Group screenOptions={{
         headerShown: false,
-        animation: "fade",
+        animation: "fade_from_bottom",
         animationDuration: 100,
       }}>
+        <Stack.Screen name="OpenSource" component={OpenSource} />
       </Stack.Group>
     </Stack.Navigator>
   );
