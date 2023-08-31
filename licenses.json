@@ -49,6 +49,24 @@
   },
   {
     "license": "MIT",
+    "name": "file",
+    "description": "Higher level path and file manipulation functions.",
+    "homepage": "http://github.com/aconbere/node-file-utils.git"
+  },
+  {
+    "license": "MIT",
+    "name": "form-data",
+    "description": "A library to create readable \"multipart/form-data\" streams. Can be used to submit forms and file uploads to other web applications.",
+    "homepage": "git://github.com/form-data/form-data.git"
+  },
+  {
+    "license": "Apache-2.0",
+    "name": "openai",
+    "description": "Client library for the OpenAI API",
+    "homepage": "github:openai/openai-node"
+  },
+  {
+    "license": "MIT",
     "name": "react",
     "description": "React is a JavaScript library for building user interfaces.",
     "homepage": "https://github.com/facebook/react.git"

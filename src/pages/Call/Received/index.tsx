@@ -1,11 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import axios from "axios";
 import FormData from "form-data";
-import OpenAI from "openai";
 import React from "react";
-import { Animated, Platform, TouchableOpacity, View } from "react-native";
+import { Animated, TouchableOpacity, View } from "react-native";
 import AudioRecorderPlayer from "react-native-audio-recorder-player";
 
+import env from "@/../.env.json";
 import Icon_NoSelected_Help from "@/assets/icons/received/noSelected/help.svg";
 import Icon_NoSelected_Record from "@/assets/icons/received/noSelected/record.svg";
 import Icon_NoSelected_Speaker from "@/assets/icons/received/noSelected/speaker.svg";
@@ -15,7 +15,7 @@ import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg"
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
-import getRecordPermision from "@/utils/getRecordPermision";
+import { delay } from "@/utils/delay";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -119,10 +119,7 @@ const Received = ({ navigation }: props) => {
   });
 
   const onStartRecord = async () => {
-    const result = await audioRecorderPlayer.startRecorder(Platform.select({
-      ios: "hello.m4a",
-      android: `${RNFetchBlob.fs.dirs.CacheDir}/hello.mp4`,
-    }));
+    const result = await audioRecorderPlayer.startRecorder();
     audioRecorderPlayer.addRecordBackListener((e) => {
       setState({
         ...state,
@@ -134,33 +131,7 @@ const Received = ({ navigation }: props) => {
       return;
     });
 
-    //파일로 변환
-    // result를 파일로 변환
-
-
-
-    // const form = new FormData();
-    // form.append("model", "whisper-1");
-    // form.append("file", {
-    //   uri: result,
-    //   type: "audio/x-wav",
-    //   name: "file.wav"
-    // });
-
-    // const response = await axios.post(
-    //   "https://api.openai.com/v1/audio/transcriptions",
-    //   form,
-    //   {
-    //     headers: {
-    //       ...form.getHeaders(),
-    //       "Authorization": "Bearer " + process.env.OPENAI_API_KEY,
-    //       "Content-Type": "multipart/form-data"
-    //     }
-    //   }
-    // );
-    console.log(response.data);
-
-    console.log("res", result);
+    console.log("START", result);
   };
   
   const onStopRecord = async () => {
@@ -170,7 +141,30 @@ const Received = ({ navigation }: props) => {
       ...state,
       recordSecs: 0,
     });
-    console.log("res", result);
+    try{
+      const form = new FormData();
+      form.append("model", "whisper-1");
+      form.append("file", {
+        uri: result,
+        type: "audio/mpeg",
+        name: "audio.mp3"
+      });
+      const response = await axios.post(
+        "https://api.openai.com/v1/audio/transcriptions",
+        form,
+        {
+          headers: {
+            "Authorization": "Bearer " + env.OPENAI_API_KEY,
+            "Content-Type": "multipart/form-data",
+          }
+        }
+      );
+      console.log(response.data);
+      return response.data.text;
+    } catch(e) {
+      console.log(e);
+      return "";
+    }
   };
   
   const onStartPlay = async () => {
@@ -195,11 +189,69 @@ const Received = ({ navigation }: props) => {
     audioRecorderPlayer.removePlayBackListener();
   };
 
+  const getWhisper = async (data: string) => {
+    try{
+      const form = new FormData();
+      form.append("model", "whisper-1");
+      form.append("file", {
+        uri: data,
+        type: "audio/mpeg",
+        name: "audio.mp3"
+      });
+      const response = await axios.post(
+        "https://api.openai.com/v1/audio/transcriptions",
+        form,
+        {
+          headers: {
+            "Authorization": "Bearer " + env.OPENAI_API_KEY,
+            "Content-Type": "multipart/form-data",
+          }
+        }
+      );
+      return response.data.text;
+    } catch(e) {
+      console.log(e);
+      return "whisper error";
+    }
+  };
+
+  const voice = async () => {
+    let recorder = "", ctn = true;
+    const data: string[] = [];
+    const record = async () => {
+      recorder = await audioRecorderPlayer.startRecorder();
+      await delay(3000);
+      recorder = await audioRecorderPlayer.stopRecorder();
+      getWhisperData();
+      if(ctn) record();
+      else return;
+    };
+    const getWhisperData = async () => {
+      const result = await getWhisper(recorder);
+      if(result === "whisper error") return;
+      if(!result) ctn = false;
+      data.push(result);
+      console.log(result);
+    };
+    await record();
+    return data;
+    // const data = await getWhisper(recorder);
+    
+
+    // const data: string[] = [];
+    // await onStartRecord();
+    // await delay(3000);
+    // const result = await onStopRecord();
+    // data.push(result);
+    // if(result) data.push(...(await voice()));
+    // return data;
+  };
+
   React.useEffect(() => {
-    onStartRecord();
-    setTimeout(() => {
-      onStopRecord();
-    }, 5000);
+    (async () => {
+      const data = (await voice()).join(" ");
+      console.log(data);
+    })();
   }, []);
 
   React.useEffect(() => {
