@@ -61,6 +61,12 @@
   },
   {
     "license": "MIT",
+    "name": "react-native-audio-recorder-player",
+    "description": "React Native Audio Recorder and Player.",
+    "homepage": "git+https://github.com/dooboolab/react-native-audio-recorder-player"
+  },
+  {
+    "license": "MIT",
     "name": "react-native-bootsplash",
     "description": "Display a bootsplash on your app starts. Hide it when you want.",
     "homepage": "https://github.com/zoontek/react-native-bootsplash.git"
@@ -82,6 +88,12 @@
     "name": "react-native-linear-gradient",
     "description": "A <LinearGradient> element for React Native",
     "homepage": "https://github.com/react-native-linear-gradient/react-native-linear-gradient.git"
+  },
+  {
+    "license": "MIT",
+    "name": "react-native-permissions",
+    "description": "An unified permissions API for React Native on iOS, Android and Windows",
+    "homepage": "https://github.com/zoontek/react-native-permissions.git"
   },
   {
     "license": "MIT",

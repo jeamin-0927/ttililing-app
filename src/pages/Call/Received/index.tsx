@@ -1,6 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import axios from "axios";
+import FormData from "form-data";
+import OpenAI from "openai";
 import React from "react";
-import { Animated, TouchableOpacity, View } from "react-native";
+import { Animated, Platform, TouchableOpacity, View } from "react-native";
+import AudioRecorderPlayer from "react-native-audio-recorder-player";
 
 import Icon_NoSelected_Help from "@/assets/icons/received/noSelected/help.svg";
 import Icon_NoSelected_Record from "@/assets/icons/received/noSelected/record.svg";
@@ -11,6 +15,7 @@ import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg"
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
+import getRecordPermision from "@/utils/getRecordPermision";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -18,6 +23,9 @@ import Help from "./Help";
 import Main from "./Main";
 import Record from "./Record";
 import styles from "./styles";
+
+
+const audioRecorderPlayer = new AudioRecorderPlayer();
 
 const btns: {
   id: "speaker" | "record" | "help",
@@ -100,6 +108,110 @@ const Received = ({ navigation }: props) => {
       }
     });
   };
+
+  const [state, setState] = React.useState({
+    recordSecs: 0,
+    recordTime: "00:00:00",
+    currentPositionSec: 0,
+    currentDurationSec: 0,
+    playTime: "00:00:00",
+    duration: "00:00:00",
+  });
+
+  const onStartRecord = async () => {
+    const result = await audioRecorderPlayer.startRecorder(Platform.select({
+      ios: "hello.m4a",
+      android: `${RNFetchBlob.fs.dirs.CacheDir}/hello.mp4`,
+    }));
+    audioRecorderPlayer.addRecordBackListener((e) => {
+      setState({
+        ...state,
+        recordSecs: e.currentPosition,
+        recordTime: audioRecorderPlayer.mmssss(
+          Math.floor(e.currentPosition),
+        ),
+      });
+      return;
+    });
+
+    //파일로 변환
+    // result를 파일로 변환
+
+
+
+    // const form = new FormData();
+    // form.append("model", "whisper-1");
+    // form.append("file", {
+    //   uri: result,
+    //   type: "audio/x-wav",
+    //   name: "file.wav"
+    // });
+
+    // const response = await axios.post(
+    //   "https://api.openai.com/v1/audio/transcriptions",
+    //   form,
+    //   {
+    //     headers: {
+    //       ...form.getHeaders(),
+    //       "Authorization": "Bearer " + process.env.OPENAI_API_KEY,
+    //       "Content-Type": "multipart/form-data"
+    //     }
+    //   }
+    // );
+    console.log(response.data);
+
+    console.log("res", result);
+  };
+  
+  const onStopRecord = async () => {
+    const result = await audioRecorderPlayer.stopRecorder();
+    audioRecorderPlayer.removeRecordBackListener();
+    setState({
+      ...state,
+      recordSecs: 0,
+    });
+    console.log("res", result);
+  };
+  
+  const onStartPlay = async () => {
+    console.log("onStartPlay");
+    const msg = await audioRecorderPlayer.startPlayer();
+    console.log(msg);
+    audioRecorderPlayer.addPlayBackListener((e) => {
+      setState({
+        ...state,
+        currentPositionSec: e.currentPosition,
+        currentDurationSec: e.duration,
+        playTime: audioRecorderPlayer.mmssss(Math.floor(e.currentPosition)),
+        duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+      });
+      return;
+    });
+  };
+  
+  const onStopPlay = async () => {
+    console.log("onStopPlay");
+    audioRecorderPlayer.stopPlayer();
+    audioRecorderPlayer.removePlayBackListener();
+  };
+
+  React.useEffect(() => {
+    onStartRecord();
+    setTimeout(() => {
+      onStopRecord();
+    }, 5000);
+  }, []);
+
+  React.useEffect(() => {
+    if(ClickBtn.speaker) {
+      onStartPlay();
+      console.log(state);
+    }
+    else {
+      onStopPlay();
+    }
+  }, [ClickBtn.speaker]);
+
 
   return (
     <CallView navigation={navigation}>
