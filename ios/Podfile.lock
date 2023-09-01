@@ -512,6 +512,8 @@ PODS:
     - React-jsi (= 0.72.4)
     - React-logger (= 0.72.4)
     - React-perflogger (= 0.72.4)
+  - rn-fetch-blob (0.12.0):
+    - React-Core
   - RNAudioRecorderPlayer (3.5.4):
     - React-Core
   - RNBootSplash (5.0.2):
@@ -558,6 +560,11 @@ PODS:
   - RNScreens (3.24.0):
     - React-Core
     - React-RCTImage
+  - RNSound (0.11.2):
+    - React-Core
+    - RNSound/Core (= 0.11.2)
+  - RNSound/Core (0.11.2):
+    - React-Core
   - RNSVG (13.13.0):
     - React-Core
   - SocketRocket (0.6.1)
@@ -633,6 +640,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNAudioRecorderPlayer (from `../node_modules/react-native-audio-recorder-player`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
@@ -642,6 +650,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -754,6 +763,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNAudioRecorderPlayer:
     :path: "../node_modules/react-native-audio-recorder-player"
   RNBootSplash:
@@ -772,6 +783,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSound:
+    :path: "../node_modules/react-native-sound"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
@@ -837,6 +850,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 4941cc1b3cf08b792fbf666342c9fc95f1969035
   React-utils: b79f2411931f9d3ea5781404dcbb2fa8a837e13a
   ReactCommon: 4b2bdcb50a3543e1c2b2849ad44533686610826d
+  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNAudioRecorderPlayer: 1ff1ddabbe89031df12ba9d5ac2fa724697c5c48
   RNBootSplash: 162e6b22df17b8fadc1ab68b0a43093d1e6c4cab
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
@@ -846,6 +860,7 @@ SPEC CHECKSUMS:
   RNPermissions: 32f7c4a1f056bdb6750f141ae2b743c5d1464124
   RNReanimated: 726395a2fa2f04cea340274ba57a4e659bc0d9c1
   RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
+  RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981

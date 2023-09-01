@@ -1,4 +1,3 @@
-import { Animated } from "react-native";
 import { DefaultValue, atom, selector } from "recoil";
 
 import colors from "./colors";
@@ -82,5 +81,18 @@ export const CallingRecordSelector = selector<CallingRecord[]>({
       ...prev,
       record: record instanceof DefaultValue ? [] : record
     }));
+  }
+});
+
+export const CallingRecordLastOtherSelector = selector<string>({
+  key: "CallingRecordLastOtherSelector",
+  get: ({ get }) => {
+    const record = get(CallingRecordSelector);
+    for(let i = record.length - 1; i >= 0; i--) {
+      if(record[i].type === "me") {
+        return record[i].text;
+      }
+    }
+    return "";
   }
 });

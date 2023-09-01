@@ -22,20 +22,10 @@ const Main = () => {
 
   const startAnimation = () => {
     setColor(colors.green);
-    // Animated.timing(PositionAnimation, {
-    //   toValue: 260,
-    //   duration: 60 * 1000,
-    //   useNativeDriver: true
-    // }).start();
   };
 
   const stopAnimation = () => {
     setColor(colors.gray500);
-    // Animated.timing(PositionAnimation, {
-    //   toValue: 0,
-    //   duration: 0,
-    //   useNativeDriver: true
-    // }).start();
   };
 
   const getWhisper = async (data: string) => {
@@ -102,11 +92,6 @@ const Main = () => {
       <Animated.View style={{
         ...styles.gradient,
         backgroundColor: color,
-        // transform: [
-        //   {
-        //     translateY: PositionAnimation
-        //   }
-        // ]
       }} />
     </TouchableOpacity>
   );
