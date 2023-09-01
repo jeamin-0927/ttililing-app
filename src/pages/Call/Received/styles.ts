@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
     gap: 8,
     alignSelf: "stretch",
   },
+  center: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+  },
   callStart: {
     color: colors.gray000,
     textAlign: "center",

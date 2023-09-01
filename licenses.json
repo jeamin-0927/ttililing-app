@@ -133,6 +133,12 @@
   },
   {
     "license": "MIT",
+    "name": "react-native-sound-player",
+    "description": "Play or stream audio files in ReactNative on iOS/Android",
+    "homepage": "https://github.com/johnsonsu/react-native-sound-player"
+  },
+  {
+    "license": "MIT",
     "name": "react-native-svg",
     "description": "SVG library for react-native",
     "homepage": "https://github.com/react-native-community/react-native-svg"
@@ -154,5 +160,11 @@
     "name": "recoil",
     "description": "Recoil - A state management library for React",
     "homepage": "https://github.com/facebookexperimental/Recoil.git"
+  },
+  {
+    "license": "MIT",
+    "name": "rn-fetch-blob",
+    "description": "A module provides upload, download, and files access API. Supports file stream read/write for process large files.",
+    "homepage": "https://github.com/joltup/rn-fetch-blob.git"
   }
 ]
