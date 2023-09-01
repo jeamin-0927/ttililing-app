@@ -39,6 +39,21 @@ export const CallingAtom = atom({
     color: colors.gray500,
     recording: false,
     record: [] as CallingRecord[],
+    stop: false
+  }
+});
+
+export const CallingStopSelector = selector<boolean>({
+  key: "CallingStopSelector",
+  get: ({ get }) => {
+    const { stop } = get(CallingAtom);
+    return stop;
+  },
+  set: ({ set }, stop: boolean | DefaultValue) => {
+    set(CallingAtom, (prev) => ({
+      ...prev,
+      stop: stop instanceof DefaultValue ? false : stop
+    }));
   }
 });
 

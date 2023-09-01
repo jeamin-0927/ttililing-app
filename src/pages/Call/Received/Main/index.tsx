@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 
 import env from "@/../.env.json";
 import colors from "@/utils/colors";
-import { CallingColorSelector, CallingRecordSelector, CallingRecordingSelector } from "@/utils/states";
+import { CallingColorSelector, CallingRecordSelector, CallingRecordingSelector, CallingStopSelector } from "@/utils/states";
 
 import styles from "./styles";
 
@@ -19,6 +19,14 @@ const Main = () => {
   const [color, setColor] = useRecoilState(CallingColorSelector);
   const [recording, setRecording] = useRecoilState(CallingRecordingSelector);
   const [log, setLog] = useRecoilState(CallingRecordSelector);
+  const [stop, setStop] = useRecoilState(CallingStopSelector);
+  
+  React.useEffect(() => {
+    if(stop) {
+      setStop(false);
+      onStopRecord();
+    }
+  }, [stop]);
 
   const startAnimation = () => {
     setColor(colors.green);

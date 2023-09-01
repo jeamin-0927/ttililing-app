@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Animated, TouchableOpacity, View } from "react-native";
 import SoundPlayer from "react-native-sound-player";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import RNFetchBlob from "rn-fetch-blob";
 
 import env from "@/../.env.json";
@@ -16,7 +16,7 @@ import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
 import random from "@/utils/random";
-import { CallingRecordLastOtherSelector, CallingRecordSelector } from "@/utils/states";
+import { CallingRecordLastOtherSelector, CallingRecordSelector, CallingStopSelector } from "@/utils/states";
 import voices from "@/utils/voices";
 
 import { StackParamList as ParentsStackParamList } from "../types";
@@ -71,10 +71,12 @@ const Received = ({ navigation }: props) => {
   const [voice, setVoice] = React.useState(voices[0]);
   const resetLog = useResetRecoilState(CallingRecordSelector);
   const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
+  const stopVoice = useSetRecoilState(CallingStopSelector);
 
   const init = () => {
     resetLog();
     setVoice(voices[random(0, voices.length - 1)]);
+    stopVoice(true);
   };
   navigation.addListener("beforeRemove", () => {
     init();
@@ -100,8 +102,9 @@ const Received = ({ navigation }: props) => {
           "X-NCP-APIGW-API-KEY-ID": env.NAVER_CLIENT_ID,
           "X-NCP-APIGW-API-KEY": env.NAVER_CLIENT_SECRET,
         },
-        `speaker=${voice.id}&text=${lastOther}&volume=0&speed=0&pitch=0`
+        `speaker=${voice.id}&text=${lastOther}&volume=5&speed=0&pitch=0`
       );
+      SoundPlayer.setVolume(ClickBtn.speaker ? 1 : 0.02);
       SoundPlayer.playUrl(res.path());
     } catch (error) {
       console.error("Error:", error);
@@ -150,6 +153,7 @@ const Received = ({ navigation }: props) => {
       cancelButtonText: "취소",
       onConfirm: () => {
         navigation.replace("Record");
+        init();
       }
     });
   };

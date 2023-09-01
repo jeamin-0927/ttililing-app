@@ -12,6 +12,13 @@ const Record = () => {
   const log = useRecoilValue(CallingRecordSelector);
   const size = useRecoilValue(SizeAtom);
   const scrollRef = React.useRef<ScrollView>(null);
+
+  React.useEffect(() => {
+    scrollRef.current?.scrollToEnd({
+      animated: false,
+    });
+  }, [log.length]);
+
   return (
     <View style={{
       ...styles.container,
