@@ -19,6 +19,8 @@ import Main from "./Main";
 import Record from "./Record";
 import styles from "./styles";
 
+
+
 const btns: {
   id: "speaker" | "record" | "help",
   name: string,

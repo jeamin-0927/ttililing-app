@@ -49,6 +49,24 @@
   },
   {
     "license": "MIT",
+    "name": "file",
+    "description": "Higher level path and file manipulation functions.",
+    "homepage": "http://github.com/aconbere/node-file-utils.git"
+  },
+  {
+    "license": "MIT",
+    "name": "form-data",
+    "description": "A library to create readable \"multipart/form-data\" streams. Can be used to submit forms and file uploads to other web applications.",
+    "homepage": "git://github.com/form-data/form-data.git"
+  },
+  {
+    "license": "Apache-2.0",
+    "name": "openai",
+    "description": "Client library for the OpenAI API",
+    "homepage": "github:openai/openai-node"
+  },
+  {
+    "license": "MIT",
     "name": "react",
     "description": "React is a JavaScript library for building user interfaces.",
     "homepage": "https://github.com/facebook/react.git"
@@ -58,6 +76,12 @@
     "name": "react-native",
     "description": "A framework for building native apps using React",
     "homepage": "github:facebook/react-native"
+  },
+  {
+    "license": "MIT",
+    "name": "react-native-audio-recorder-player",
+    "description": "React Native Audio Recorder and Player.",
+    "homepage": "git+https://github.com/dooboolab/react-native-audio-recorder-player"
   },
   {
     "license": "MIT",
@@ -82,6 +106,12 @@
     "name": "react-native-linear-gradient",
     "description": "A <LinearGradient> element for React Native",
     "homepage": "https://github.com/react-native-linear-gradient/react-native-linear-gradient.git"
+  },
+  {
+    "license": "MIT",
+    "name": "react-native-permissions",
+    "description": "An unified permissions API for React Native on iOS, Android and Windows",
+    "homepage": "https://github.com/zoontek/react-native-permissions.git"
   },
   {
     "license": "MIT",
