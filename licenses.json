@@ -133,9 +133,9 @@
   },
   {
     "license": "MIT",
-    "name": "react-native-sound",
-    "description": "React Native module for playing sound clips on iOS, Android, and Windows",
-    "homepage": "zmxv/react-native-sound"
+    "name": "react-native-sound-player",
+    "description": "Play or stream audio files in ReactNative on iOS/Android",
+    "homepage": "https://github.com/johnsonsu/react-native-sound-player"
   },
   {
     "license": "MIT",

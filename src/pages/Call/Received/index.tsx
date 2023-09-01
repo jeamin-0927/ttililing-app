@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Animated, TouchableOpacity, View } from "react-native";
-import Sound from "react-native-sound";
+import SoundPlayer from "react-native-sound-player";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import RNFetchBlob from "rn-fetch-blob";
 
@@ -15,7 +15,9 @@ import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg"
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
+import random from "@/utils/random";
 import { CallingRecordLastOtherSelector, CallingRecordSelector } from "@/utils/states";
+import voices from "@/utils/voices";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -66,9 +68,22 @@ const Received = ({ navigation }: props) => {
     help: false,
   });
   const [Center, setCenter] = React.useState<React.JSX.Element>(<Main />);
-  
+  const [voice, setVoice] = React.useState(voices[0]);
   const resetLog = useResetRecoilState(CallingRecordSelector);
   const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
+
+  const init = () => {
+    resetLog();
+    setVoice(voices[random(0, voices.length - 1)]);
+  };
+  navigation.addListener("beforeRemove", () => {
+    init();
+  });
+  navigation.addListener("focus", () => {
+    init();
+  });
+
+
   const TTS = async () => {
     if(!lastOther) return;
     console.log("TTS", lastOther);
@@ -85,26 +100,15 @@ const Received = ({ navigation }: props) => {
           "X-NCP-APIGW-API-KEY-ID": env.NAVER_CLIENT_ID,
           "X-NCP-APIGW-API-KEY": env.NAVER_CLIENT_SECRET,
         },
-        "speaker=nara_call&text=" + lastOther + "&volume=5&speed=0&pitch=0&emotion=2"
+        `speaker=${voice.id}&text=${lastOther}&volume=0&speed=0&pitch=0`
       );
-      const sound = new Sound(res.path(), "", (e) => {
-        if (e) {
-          console.error("error loading track:", e);
-        } else {
-          console.log("duration in seconds: " + sound.getDuration() + "number of channels: " + sound.getNumberOfChannels());
-        }
-      });
-      sound.play();
+      SoundPlayer.playUrl(res.path());
     } catch (error) {
       console.error("Error:", error);
       console.log(JSON.stringify(error, null, 2));
     }
   };
-
-  React.useEffect(() => {
-    resetLog();
-  }, []);
-
+  
   React.useEffect(() => {
     if(!lastOther) return;
     TTS();

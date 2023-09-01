@@ -32,6 +32,7 @@ const Main = () => {
     try{
       const form = new FormData();
       form.append("model", "whisper-1");
+      form.append("language", "ko");
       form.append("file", {
         uri: data,
         type: "audio/mpeg",
