@@ -1,3 +1,4 @@
+import axios from "axios";
 import { OpenAI } from "openai";
 
 import env from "@/../.env.json";
@@ -20,24 +21,52 @@ class DialogueFlow {
 
 export default class Dialogue extends DialogueFlow {
   protected request = async (request: string) => {
-    return await openai.chat.completions.create({
-      model: "gpt-4",
-      max_tokens: 200,
-      messages: [
-        {
-          "role": "system",
-          "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
-        },
-        {
-          "role": "user",
-          "content": request
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-4",
+        max_tokens: 200,
+        messages: [
+          {
+            "role": "system",
+            "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
+          },
+          {
+            "role": "user",
+            "content": request
+          }
+        ]
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + env.OPENAI_API_KEY
         }
-      ]
-    });
+      }
+    );
+    return response.data;
+    // return await openai.chat.completions.create({
+    //   model: "gpt-4",
+    //   max_tokens: 200,
+    //   messages: [
+    //     {
+    //       "role": "system",
+    //       "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
+    //     },
+    //     {
+    //       "role": "user",
+    //       "content": request
+    //     }
+    //   ]
+    // });
   };
   /**입력받은 문자열에 대해 GPT-4가 답변한 문자열 반환 */
   answer = async (request: string) => {
-    if(!this.checkSubject()) return "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.";
+    if(!this.checkSubject()) return {
+      "error": "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.",
+      "answer": "",
+      "recommend": ""
+    };
     this.dialogueMessage.push({
       index: this.dialogueMessage.length,
       role: "user",
@@ -50,7 +79,8 @@ export default class Dialogue extends DialogueFlow {
         message: response.choices[0].message.content
       });
       return {
-        "answer": response.choices[0].message.content,
+        "error": "",
+        "answer": response.choices[0].message.content as string,
         "recommend": ""
       };
     }); 

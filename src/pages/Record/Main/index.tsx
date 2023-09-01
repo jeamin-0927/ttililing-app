@@ -6,6 +6,7 @@ import { useSetRecoilState } from "recoil";
 
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
+import Dialogue from "@/utils/api/dialogue";
 import { tokenAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
@@ -15,6 +16,15 @@ import styles from "./styles";
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
   const setTokens = useSetRecoilState(tokenAtom);
+
+  React.useEffect(() => {
+    (async () => {
+      const dialog = new Dialogue();
+      dialog.setSubject("짜장면 주문하기");
+      const data = await dialog.answer("짜장면 주문하고 싶어요.");
+      console.log(data);
+    })();
+  }, []);
 
   const onPress = async () => {
     navigation.navigate("Confirm", {

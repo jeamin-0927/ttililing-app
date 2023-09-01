@@ -72,7 +72,9 @@ const Calling = ({ navigation }: props) => {
           <TouchableOpacity 
             style={styles.startConversation}
             disabled={!subject}
-            onPress={() => navigation.navigate("Received")}
+            onPress={() => navigation.navigate("Received", {
+              topic: subject,
+            })}
           >
             <Text style={styles.startConversationText}>🤙  전화 시작하기  {">"}</Text>
           </TouchableOpacity>

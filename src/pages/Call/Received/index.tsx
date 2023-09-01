@@ -15,6 +15,7 @@ import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg"
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
+import Dialogue from "@/utils/api/dialogue";
 import random from "@/utils/random";
 import { CallingRecordLastOtherSelector, CallingRecordSelector, CallingStopSelector } from "@/utils/states";
 import voices from "@/utils/voices";
@@ -61,13 +62,15 @@ const btns: {
 ];
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Received">;
-const Received = ({ navigation }: props) => {
+const Received = ({ navigation, route }: props) => {
+  const { topic } = route.params;
   const [ClickBtn, setClickBtn] = React.useState({
     speaker: true,
     record: false,
     help: false,
   });
-  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main />);
+  const [dialogue, setDialogue] = React.useState(new Dialogue());
+  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main dialogue={dialogue} />);
   const [voice, setVoice] = React.useState(voices[0]);
   const resetLog = useResetRecoilState(CallingRecordSelector);
   const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
@@ -77,6 +80,8 @@ const Received = ({ navigation }: props) => {
     resetLog();
     setVoice(voices[random(0, voices.length - 1)]);
     stopVoice(true);
+    setDialogue(new Dialogue());
+    dialogue.setSubject(topic);
   };
   navigation.addListener("beforeRemove", () => {
     init();
@@ -84,6 +89,12 @@ const Received = ({ navigation }: props) => {
   navigation.addListener("focus", () => {
     init();
   });
+  React.useEffect(() => {
+    init();
+    return () => {
+      init();
+    };
+  }, []);
 
 
   const TTS = async () => {
@@ -141,7 +152,7 @@ const Received = ({ navigation }: props) => {
       changePage(<Help />);
     }
     else {
-      changePage(<Main />);
+      changePage(<Main dialogue={dialogue} />);
     }
   }, [ClickBtn.record, ClickBtn.help]);
 

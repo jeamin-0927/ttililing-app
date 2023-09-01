@@ -4,7 +4,9 @@ export type StackParamList = ParentsStackParamList & {
 	Main: undefined;
 
 	Calling: undefined;
-	Received: undefined;
+	Received: {
+		topic: string;
+	};
 };
 
 export type StackString = keyof StackParamList;

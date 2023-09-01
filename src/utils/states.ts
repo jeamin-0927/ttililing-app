@@ -104,6 +104,19 @@ export const CallingRecordLastOtherSelector = selector<string>({
   get: ({ get }) => {
     const record = get(CallingRecordSelector);
     for(let i = record.length - 1; i >= 0; i--) {
+      if(record[i].type === "other") {
+        return record[i].text;
+      }
+    }
+    return "";
+  }
+});
+
+export const CallingRecordLastMeSelector = selector<string>({
+  key: "CallingRecordLastMeSelector",
+  get: ({ get }) => {
+    const record = get(CallingRecordSelector);
+    for(let i = record.length - 1; i >= 0; i--) {
       if(record[i].type === "me") {
         return record[i].text;
       }
