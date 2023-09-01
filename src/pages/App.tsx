@@ -7,6 +7,7 @@ import { Platform, StatusBar } from "react-native";
 import BootSplash from "react-native-bootsplash";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
+import "react-native-reanimated";
 import { AlertModal, ConfirmModal } from "@/components/Modals";
 import colors from "@/utils/colors";
 import { isLoginSelector, tokenAtom } from "@/utils/states";
@@ -33,7 +34,7 @@ const App = () => {
   const isLogin = useRecoilValue(isLoginSelector);
 
   React.useEffect(() => {
-    if(Platform.OS !== "android") return;
+    // if(Platform.OS !== "android") return;
     if(isLogin) {
       StatusBar.setBackgroundColor(colors.gray000);
       StatusBar.setBarStyle("dark-content");

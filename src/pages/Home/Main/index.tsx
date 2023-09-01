@@ -8,12 +8,14 @@ import Icon_Check from "@/assets/icons/check.svg";
 import Icon_Close from "@/assets/icons/close.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
+import Dialogue from "@/utils/api/dialogue";
 import colors from "@/utils/colors";
 import { tokenAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
 import styles from "./styles";
+
 
 
 const Icons = ({ type }: {
@@ -30,7 +32,7 @@ const Icons = ({ type }: {
 );
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
-const Main = ({ navigation }: props) => {
+const Main = async ({ navigation }: props) => {
   const setTokens = useSetRecoilState(tokenAtom);
 
   const onPress = async () => {
@@ -46,6 +48,9 @@ const Main = ({ navigation }: props) => {
       }
     });
   };
+
+  const api = new Dialogue;
+  api.setSubject("중화요리식당에서 주문하는 상황");
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
@@ -106,6 +111,7 @@ const Main = ({ navigation }: props) => {
           <View style={styles.nowBottomTop}>
             <Text style={styles.nowBottomTopTitle}>전화 시간 변화 그래프</Text>
             <Text style={styles.nowBottomTopDate}>(8월 1일 ~ 8월 31일)</Text>
+            <Text style={styles.topNumber}>{await api.answer("안녕하세여")}</Text>
           </View>
           <View style={styles.nowBottomBottom}></View>
         </View>
