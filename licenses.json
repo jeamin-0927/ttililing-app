@@ -48,18 +48,6 @@
     "homepage": "https://github.com/axios/axios.git"
   },
   {
-    "license": "Apache-2.0",
-    "name": "openai",
-    "description": "Client library for the OpenAI API",
-    "homepage": "github:openai/openai-node"
-  },
-  {
-    "license": "BSD",
-    "name": "packages",
-    "description": "node-packages is [require.js](http://requirejs.org/) for node.js.",
-    "homepage": "git://github.com/classdojo/node-packages.git"
-  },
-  {
     "license": "MIT",
     "name": "file",
     "description": "Higher level path and file manipulation functions.",
@@ -76,6 +64,12 @@
     "name": "openai",
     "description": "Client library for the OpenAI API",
     "homepage": "github:openai/openai-node"
+  },
+  {
+    "license": "BSD",
+    "name": "packages",
+    "description": "node-packages is [require.js](http://requirejs.org/) for node.js.",
+    "homepage": "git://github.com/classdojo/node-packages.git"
   },
   {
     "license": "MIT",

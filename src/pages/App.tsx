@@ -34,7 +34,7 @@ const App = () => {
   const isLogin = useRecoilValue(isLoginSelector);
 
   React.useEffect(() => {
-    // if(Platform.OS !== "android") return;
+    if(Platform.OS !== "android") return;
     if(isLogin) {
       StatusBar.setBackgroundColor(colors.gray000);
       StatusBar.setBarStyle("dark-content");

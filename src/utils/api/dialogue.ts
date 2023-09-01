@@ -1,10 +1,12 @@
 import { OpenAI } from "openai";
 
+import env from "@/../.env.json";
+
 import { IdialogueHistory, IdialogueMessage } from "./interfaces/Idialogue";
 // import { openai } from "./modules/configure";
 
 const openai = new OpenAI({
-  apiKey: ""
+  apiKey: env.OPENAI_API_KEY
 });
 
 class DialogueFlow {
@@ -47,7 +49,10 @@ export default class Dialogue extends DialogueFlow {
         role: response.choices[0].message.role,
         message: response.choices[0].message.content
       });
-      return response.choices[0].message.content;
+      return {
+        "answer": response.choices[0].message.content,
+        "recommend": ""
+      };
     }); 
   };
   /**대화기록 열람 */
