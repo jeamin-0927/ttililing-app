@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "prestart": "ts-node makeEnv.ts",
     "postinstall": "react-native setup-ios-permissions && pod-install && yarn run licenses",
     "android": "react-native run-android",
     "ios": "react-native run-ios",

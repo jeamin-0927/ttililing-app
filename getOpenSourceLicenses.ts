@@ -1,4 +1,4 @@
-import {promises as fs} from 'fs';
+import { promises as fs } from 'fs';
 
 const getOpenSourceLicenses = async () => {
   const folder = await fs.readdir('./node_modules');
