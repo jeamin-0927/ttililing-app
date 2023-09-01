@@ -1,11 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import axios from "axios";
-import FormData from "form-data";
 import React from "react";
 import { Animated, TouchableOpacity, View } from "react-native";
-import AudioRecorderPlayer from "react-native-audio-recorder-player";
 
-import env from "@/../.env.json";
 import Icon_NoSelected_Help from "@/assets/icons/received/noSelected/help.svg";
 import Icon_NoSelected_Record from "@/assets/icons/received/noSelected/record.svg";
 import Icon_NoSelected_Speaker from "@/assets/icons/received/noSelected/speaker.svg";
@@ -15,7 +11,6 @@ import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg"
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
 import Text from "@/components/Text";
-import { delay } from "@/utils/delay";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -25,7 +20,6 @@ import Record from "./Record";
 import styles from "./styles";
 
 
-const audioRecorderPlayer = new AudioRecorderPlayer();
 
 const btns: {
   id: "speaker" | "record" | "help",
@@ -108,162 +102,6 @@ const Received = ({ navigation }: props) => {
       }
     });
   };
-
-  const [state, setState] = React.useState({
-    recordSecs: 0,
-    recordTime: "00:00:00",
-    currentPositionSec: 0,
-    currentDurationSec: 0,
-    playTime: "00:00:00",
-    duration: "00:00:00",
-  });
-
-  const onStartRecord = async () => {
-    const result = await audioRecorderPlayer.startRecorder();
-    audioRecorderPlayer.addRecordBackListener((e) => {
-      setState({
-        ...state,
-        recordSecs: e.currentPosition,
-        recordTime: audioRecorderPlayer.mmssss(
-          Math.floor(e.currentPosition),
-        ),
-      });
-      return;
-    });
-
-    console.log("START", result);
-  };
-  
-  const onStopRecord = async () => {
-    const result = await audioRecorderPlayer.stopRecorder();
-    audioRecorderPlayer.removeRecordBackListener();
-    setState({
-      ...state,
-      recordSecs: 0,
-    });
-    try{
-      const form = new FormData();
-      form.append("model", "whisper-1");
-      form.append("file", {
-        uri: result,
-        type: "audio/mpeg",
-        name: "audio.mp3"
-      });
-      const response = await axios.post(
-        "https://api.openai.com/v1/audio/transcriptions",
-        form,
-        {
-          headers: {
-            "Authorization": "Bearer " + env.OPENAI_API_KEY,
-            "Content-Type": "multipart/form-data",
-          }
-        }
-      );
-      console.log(response.data);
-      return response.data.text;
-    } catch(e) {
-      console.log(e);
-      return "";
-    }
-  };
-  
-  const onStartPlay = async () => {
-    console.log("onStartPlay");
-    const msg = await audioRecorderPlayer.startPlayer();
-    console.log(msg);
-    audioRecorderPlayer.addPlayBackListener((e) => {
-      setState({
-        ...state,
-        currentPositionSec: e.currentPosition,
-        currentDurationSec: e.duration,
-        playTime: audioRecorderPlayer.mmssss(Math.floor(e.currentPosition)),
-        duration: audioRecorderPlayer.mmssss(Math.floor(e.duration)),
-      });
-      return;
-    });
-  };
-  
-  const onStopPlay = async () => {
-    console.log("onStopPlay");
-    audioRecorderPlayer.stopPlayer();
-    audioRecorderPlayer.removePlayBackListener();
-  };
-
-  const getWhisper = async (data: string) => {
-    try{
-      const form = new FormData();
-      form.append("model", "whisper-1");
-      form.append("file", {
-        uri: data,
-        type: "audio/mpeg",
-        name: "audio.mp3"
-      });
-      const response = await axios.post(
-        "https://api.openai.com/v1/audio/transcriptions",
-        form,
-        {
-          headers: {
-            "Authorization": "Bearer " + env.OPENAI_API_KEY,
-            "Content-Type": "multipart/form-data",
-          }
-        }
-      );
-      return response.data.text;
-    } catch(e) {
-      console.log(e);
-      return "whisper error";
-    }
-  };
-
-  const voice = async () => {
-    let recorder = "", ctn = true;
-    const data: string[] = [];
-    const record = async () => {
-      recorder = await audioRecorderPlayer.startRecorder();
-      await delay(3000);
-      recorder = await audioRecorderPlayer.stopRecorder();
-      getWhisperData();
-      if(ctn) record();
-      else return;
-    };
-    const getWhisperData = async () => {
-      const result = await getWhisper(recorder);
-      if(result === "whisper error") return;
-      if(!result) ctn = false;
-      data.push(result);
-      console.log(result);
-    };
-    await record();
-    return data;
-    // const data = await getWhisper(recorder);
-    
-
-    // const data: string[] = [];
-    // await onStartRecord();
-    // await delay(3000);
-    // const result = await onStopRecord();
-    // data.push(result);
-    // if(result) data.push(...(await voice()));
-    // return data;
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      const data = (await voice()).join(" ");
-      console.log(data);
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    if(ClickBtn.speaker) {
-      onStartPlay();
-      console.log(state);
-    }
-    else {
-      onStopPlay();
-    }
-  }, [ClickBtn.speaker]);
-
 
   return (
     <CallView navigation={navigation}>
