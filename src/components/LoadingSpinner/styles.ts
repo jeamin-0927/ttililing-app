@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-import colors, { opacity } from "@/utils/colors";
 import fonts from "@/utils/fonts";
 
 const styles = StyleSheet.create({
@@ -11,7 +10,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    // backgroundColor: opacity(colors.gray000, 0.7),
     zIndex: 9999999,
   },
   loadingSpinnerMaskedViewParents: {
@@ -20,7 +18,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
-    transform: [{ translateY: -19 }],
+    transform: [{ translateY: -22 }],
   },
   loadingSpinnerMaskedView: {
     width: "100%",
@@ -42,10 +40,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 9999999,
     overflow: "hidden",
-    gap: 6,
+    gap: 12,
   },
   nofillText: {
-    color: colors.gray900,
     fontSize: 16,
     fontFamily: fonts(700),
     fontStyle: "normal",

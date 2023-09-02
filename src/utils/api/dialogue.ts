@@ -14,7 +14,7 @@ export default class Dialogue extends Mdialogue {
         messages: [
           {
             "role": "system",
-            "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
+            "content": `상황 : 전화를 하는 상황. ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
           },
           {
             "role": "user",
@@ -24,8 +24,8 @@ export default class Dialogue extends Mdialogue {
             "role": "assistant",
             "content": `"user"의 대한 "assistant"의 답변과 "assistant"의 답변에 응답할 "user"의 추천 대답을 
               {
-                response: "user의 제시문에 대한 assistant의 답변",
-                recommend: "assistant의 답변에 응답할 user의 추천 대답"
+                assistant: "user의 제시문에 대한 assistant의 답변",
+                user: "assistant의 답변에 응답할 user의 추천 대답"
               }
               형식의 json 형태로 답변하시오
             `
@@ -40,7 +40,13 @@ export default class Dialogue extends Mdialogue {
   };
   /**입력받은 문자열에 대해 GPT-4가 답변한 문자열 반환 */
   answer = async (request: string) => {
-    if(!this.checkSubject()) return "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.";
+    if(!this.checkSubject()) return {
+      error: "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.",
+      response: {
+        response: "",
+        recommend: ""
+      },
+    };
     this.dialogueMessage.push({
       index: this.dialogueMessage.length,
       role: "user",
@@ -48,14 +54,23 @@ export default class Dialogue extends Mdialogue {
       recommend: ""
     });
     return this.request(request).then(response => {
-      const result = JSON.parse(response.choices[0].message.content);
+      const result: {
+        assistant: string,
+        user: string
+      } = JSON.parse(response.choices[0].message.content);
       this.dialogueMessage.push({
         index: this.dialogueMessage.length,
         role: response.choices[0].message.role,
-        message: result.response,
-        recommend: result.recommend
+        message: result.assistant,
+        recommend: result.user
       });
-      return result;
+      return {
+        error: "",
+        response: {
+          response: result.assistant,
+          recommend: result.user,
+        }
+      };
       // return response.choices[0].message.content;
     }); 
   };

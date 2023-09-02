@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
   },
   calling: {
-    color: colors.gray500,
+    color: colors.gray400,
     fontFamily: fonts(600),
     fontSize: 16,
     fontStyle: "normal",

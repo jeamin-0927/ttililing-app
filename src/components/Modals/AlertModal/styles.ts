@@ -57,7 +57,7 @@ export default StyleSheet.create({
     alignSelf: "stretch",
   },
   confirm: {
-    color: colors.gray500,
+    color: colors.gray400,
     fontSize: 18,
     fontStyle: "normal",
     fontFamily: fonts(700),

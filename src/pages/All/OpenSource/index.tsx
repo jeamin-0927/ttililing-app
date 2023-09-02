@@ -44,7 +44,7 @@ const OpenSource = ({ navigation }: props) => {
           </TouchableOpacity>
           <Text style={styles.title}>오픈소스 라이센스 정보</Text>
         </View>
-        <ScrollView contentContainerStyle={styles.licences}>
+        <ScrollView style={styles.scroll} contentContainerStyle={styles.licences}>
           {
             licensesJson.map((license, index) => (
               <TouchableOpacity 

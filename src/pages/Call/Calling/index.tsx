@@ -55,7 +55,7 @@ const Calling = ({ navigation }: props) => {
                 ref={inputRef}
                 style={styles.textInput}
                 placeholder="대화 주제"
-                placeholderTextColor={colors.gray500}
+                placeholderTextColor={colors.gray400}
                 onChangeText={setSubject}
                 value={subject}
               />

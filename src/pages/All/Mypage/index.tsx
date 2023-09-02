@@ -28,7 +28,7 @@ const Mypage = ({ navigation }: props) => {
       setLoading(false);
       navigation.navigate("Alert", {
         title: "다시 불러오기 완료",
-        context: "카카오 프로필 정보를 다시 불러왔습니다.",
+        context: "프로필 정보를 다시 불러왔습니다.",
         buttonText: "확인"
       });
     }

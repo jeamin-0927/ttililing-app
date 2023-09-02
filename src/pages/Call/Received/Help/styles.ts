@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontFamily: fonts(500),
     textAlign: "center",
-    color: colors.gray500,
+    color: colors.gray400,
   },
   text: {
     textAlign: "center",

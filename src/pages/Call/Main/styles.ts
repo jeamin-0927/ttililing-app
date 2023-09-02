@@ -14,6 +14,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
   },
+  new: {
+    backgroundColor: colors.gray900,
+    width: 52,
+    height: 52,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 32,
+
+    position: "absolute",
+    bottom: 104,
+    right: 24,
+  },
   title: {
     display: "flex",
     paddingHorizontal: 24,
@@ -34,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "stretch",
     flexDirection: "row",
+    gap: 16,
   },
   itemLeft: {
     display: "flex",
@@ -75,6 +89,46 @@ const styles = StyleSheet.create({
     fontFamily: fonts(700),
     fontSize: 24,
     fontStyle: "normal",
+  },
+  titleBottom: {
+    display: "flex",
+    alignItems: "flex-start",
+    paddingHorizontal: 24,
+    width: "100%",
+    gap: 8,
+    alignSelf: "stretch",
+    flexDirection: "row",
+  },
+  unselected: {
+    display: "flex",
+    paddingHorizontal: 28,
+    paddingVertical: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+    borderRadius: 32,
+    borderWidth: 1,
+  },
+  text: {
+    fontFamily: fonts(700),
+    fontSize: 16,
+    fontStyle: "normal",
+  },
+  scrollView: {
+    width: "100%",
+    height: "100%",
+  },
+  scrollView2: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 24,
+    paddingBottom: 150,
+  },
+  scrollHorizontal: {
+    width: "100%",
+    height: 52,
   }
 });
 

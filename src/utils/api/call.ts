@@ -29,9 +29,9 @@ export default class Call extends Mcall {
         messages: [
           {
             "role": "system", 
-            "content": `상황 : ${request}\n위 상황에 알맞는 전화 수신자 하나와, ${request}에서의 {상황에 알맞는 전화 수신자 하나}를 영문으로 변환하여
+            "content": `상황 : ${request}\n위 상황에 알맞는 전화 수신자(한국어) 하나와, ${request}에서의 {상황에 알맞는 전화 수신자 하나}를 영문으로 변환하여
                 {
-                  "receiver": "상황에 알맞는 전화 수신자 하나",
+                  "receiver": "상황에 알맞는 전화 수신자 하나 (한국어)",
                   "depict": "영문으로 번역한 문장"
                 }
                 형식의 json 형태로 답변하시오

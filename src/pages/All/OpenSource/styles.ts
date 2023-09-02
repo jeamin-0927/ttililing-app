@@ -9,11 +9,13 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: colors.gray000,
     display: "flex",
-    paddingBottom: 36,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
-    gap: 24,
+  },
+  scroll: {
+    width: "100%",
+    height: "100%",
   },
   top: {
     display: "flex",
@@ -22,8 +24,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     gap: 16,
     flexDirection: "row",
-    borderBottomColor: colors.gray300,
-    borderBottomWidth: 1,
   },
   title: {
     color: colors.gray900,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingHorizontal: 24,
-    gap: 28,
+    gap: 4,
   },
   license: {
     display: "flex",
@@ -45,11 +45,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "stretch",
     gap: 8,
+    paddingBottom: 36,
   },
   licenseLicense: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.blue,
-    fontFamily: fonts(400),
+    fontFamily: fonts(700),
   },
   licenseName: {
     fontSize: 16,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: colors.gray400,
-    fontFamily: fonts(400),
+    fontFamily: fonts(200),
   }
 });
 

@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     gap: 16,
     flexDirection: "row",
-    borderBottomColor: colors.gray300,
-    borderBottomWidth: 1,
   },
   title: {
     color: colors.gray900,
@@ -52,22 +50,22 @@ const styles = StyleSheet.create({
   },
   version: {
     fontSize: 14,
-    color: colors.gray500,
+    color: colors.gray400,
     fontFamily: fonts(400),
   },
   ttililing: {
     fontSize: 22,
     textAlign: "center",
-    color: colors.gray500,
+    color: colors.gray400,
     fontFamily: fonts(600),
   },
   openSource: {
     fontSize: 14,
-    color: colors.gray500,
+    color: colors.gray400,
     fontFamily: fonts(600),
     fontStyle: "normal",
     textDecorationLine: "underline",
-    textDecorationColor: colors.gray500,
+    textDecorationColor: colors.gray400,
     textDecorationStyle: "solid",
   }
 });

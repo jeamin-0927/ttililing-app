@@ -22,7 +22,7 @@ const Record = () => {
   return (
     <View style={{
       ...styles.container,
-      height: size.height - 500,
+      height: size.height - 550,
     }}>
       {
         log.length ? (

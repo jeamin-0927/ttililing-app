@@ -59,10 +59,17 @@ export const SizeAtom = atom({
   }
 });
 
-export type CallingRecord = {
-  type: "me" | "other";
+type CallingMe = {
+  type: "me";
   text: string;
 };
+type CallingOther = {
+  type: "other";
+  text: string;
+  recommend: string;
+}
+
+export type CallingRecord = CallingMe | CallingOther;
 export const CallingAtom = atom({
   key: "calling",
   default: {
@@ -129,28 +136,35 @@ export const CallingRecordSelector = selector<CallingRecord[]>({
   }
 });
 
-export const CallingRecordLastOtherSelector = selector<string>({
+export const CallingRecordLastOtherSelector = selector<CallingOther>({
   key: "CallingRecordLastOtherSelector",
   get: ({ get }) => {
-    const record = get(CallingRecordSelector);
+    const record = get(CallingRecordSelector) as CallingOther[];
     for(let i = record.length - 1; i >= 0; i--) {
       if(record[i].type === "other") {
-        return record[i].text;
+        return record[i];
       }
     }
-    return "";
+    return {
+      type: "other",
+      text: "",
+      recommend: ""
+    };
   }
 });
 
-export const CallingRecordLastMeSelector = selector<string>({
+export const CallingRecordLastMeSelector = selector<CallingMe>({
   key: "CallingRecordLastMeSelector",
   get: ({ get }) => {
-    const record = get(CallingRecordSelector);
+    const record = get(CallingRecordSelector) as CallingMe[];
     for(let i = record.length - 1; i >= 0; i--) {
       if(record[i].type === "me") {
-        return record[i].text;
+        return record[i];
       }
     }
-    return "";
+    return {
+      type: "me",
+      text: ""
+    };
   }
 });

@@ -14,7 +14,9 @@ import Icon_Selected_Record from "@/assets/icons/received/selected/record.svg";
 import Icon_Selected_Speaker from "@/assets/icons/received/selected/speaker.svg";
 import Icon_RingWhite from "@/assets/icons/ring-white.svg";
 import CallView from "@/components/CallView";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import Text from "@/components/Text";
+import Call from "@/utils/api/call";
 import Dialogue from "@/utils/api/dialogue";
 import random from "@/utils/random";
 import { CallingRecord, CallingRecordLastMeSelector, CallingRecordLastOtherSelector, CallingRecordSelector, CallingStopSelector } from "@/utils/states";
@@ -70,13 +72,17 @@ const Received = ({ navigation, route }: props) => {
     help: false,
   });
   const [dialogue, setDialogue] = React.useState(new Dialogue());
-  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main />);
+  const [receiver, setReceiver] = React.useState({
+    name: "",
+    photo: ""
+  });
+  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main photo={receiver.photo} />);
   const [voice, setVoice] = React.useState(voices[0]);
+  const [loading, setLoading] = React.useState(false);
   const resetLog = useResetRecoilState(CallingRecordSelector);
-  const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
-  const lastMe = useRecoilValue(CallingRecordLastMeSelector);
+  const lastOther = useRecoilValue(CallingRecordLastOtherSelector).text;
+  const lastMe = useRecoilValue(CallingRecordLastMeSelector).text;
   const setLog = useSetRecoilState(CallingRecordSelector);
-  
   const stopVoice = useSetRecoilState(CallingStopSelector);
 
   const init = () => {
@@ -84,21 +90,26 @@ const Received = ({ navigation, route }: props) => {
     setVoice(voices[random(0, voices.length - 1)]);
     stopVoice(true);
     setDialogue(new Dialogue());
+  };
+  const init2 = async () => {
+    setLoading(true);
     dialogue.setSubject(topic);
+    const response = await (new Call()).call(dialogue);
+    setReceiver({
+      name: response.receiver,
+      photo: response.image,
+    });
+    setCenter(<Main photo={response.image} />);
+    console.log(response);
+    setLoading(false);
   };
   navigation.addListener("beforeRemove", () => {
     init();
   });
   navigation.addListener("focus", () => {
     init();
+    init2();
   });
-  React.useEffect(() => {
-    init();
-    return () => {
-      init();
-    };
-  }, []);
-
 
   const sendToGPT = async () => {
     if(!lastMe) return;
@@ -110,7 +121,8 @@ const Received = ({ navigation, route }: props) => {
     }
     setLog((p: CallingRecord[]) => [...p, {
       type: "other",
-      text: response.answer,
+      text: response.response.response,
+      recommend: response.response.recommend,
     }]);
     console.log(response);
   };
@@ -176,7 +188,7 @@ const Received = ({ navigation, route }: props) => {
       changePage(<Help />);
     }
     else {
-      changePage(<Main />);
+      changePage(<Main photo={receiver.photo} />);
     }
   }, [ClickBtn.record, ClickBtn.help]);
 
@@ -194,54 +206,57 @@ const Received = ({ navigation, route }: props) => {
   };
 
   return (
-    <CallView navigation={navigation}>
-      <View style={styles.top}>
-        <Text style={styles.callStart}>전화 시작</Text>
-        <Text style={styles.callWho}>띠링 중국집</Text>
-      </View>
-
-      <Animated.View style={{
-        ...styles.center,
-        opacity
-      }}>
-        { Center }
-      </Animated.View>
-
-      <View style={styles.bottom}>
-        <View style={styles.btns}>
-          {
-            btns.map((btn, i) => (
-              <TouchableOpacity 
-                style={styles.btn} 
-                key={i}
-                onPress={() => {
-                  setClickBtn({
-                    ...ClickBtn,
-                    help: btn.id === "record" ? false : ClickBtn["help"],
-                    record: btn.id === "help" ? false : ClickBtn["record"],
-                    [btn.id]: !ClickBtn[btn.id],
-                  });
-                  btn.onPress();
-                }}
-                hitSlop={{
-                  top: 5,
-                }}
-              >
-                {
-                  ClickBtn[btn.id] ? 
-                    <btn.selected style={styles.btnIcon} /> :
-                    <btn.noSelected style={styles.btnIcon} />
-                }
-                <Text style={styles.btnText}>{btn.name}</Text>
-              </TouchableOpacity>
-            ))
-          }
+    <>
+      <LoadingSpinner show={loading} dark />
+      <CallView navigation={navigation}>
+        <View style={styles.top}>
+          <Text style={styles.callStart}>전화 시작</Text>
+          <Text style={styles.callWho}>{receiver.name}</Text>
         </View>
-        <TouchableOpacity style={styles.close} onPress={hangup}>
-          <Icon_RingWhite style={styles.endIcon} />
-        </TouchableOpacity>
-      </View>
-    </CallView>
+
+        <Animated.View style={{
+          ...styles.center,
+          opacity
+        }}>
+          { Center }
+        </Animated.View>
+
+        <View style={styles.bottom}>
+          <View style={styles.btns}>
+            {
+              btns.map((btn, i) => (
+                <TouchableOpacity 
+                  style={styles.btn} 
+                  key={i}
+                  onPress={() => {
+                    setClickBtn({
+                      ...ClickBtn,
+                      help: btn.id === "record" ? false : ClickBtn["help"],
+                      record: btn.id === "help" ? false : ClickBtn["record"],
+                      [btn.id]: !ClickBtn[btn.id],
+                    });
+                    btn.onPress();
+                  }}
+                  hitSlop={{
+                    top: 5,
+                  }}
+                >
+                  {
+                    ClickBtn[btn.id] ? 
+                      <btn.selected style={styles.btnIcon} /> :
+                      <btn.noSelected style={styles.btnIcon} />
+                  }
+                  <Text style={styles.btnText}>{btn.name}</Text>
+                </TouchableOpacity>
+              ))
+            }
+          </View>
+          <TouchableOpacity style={styles.close} onPress={hangup}>
+            <Icon_RingWhite style={styles.endIcon} />
+          </TouchableOpacity>
+        </View>
+      </CallView>
+    </>
   );
 };
 

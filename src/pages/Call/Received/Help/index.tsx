@@ -1,16 +1,19 @@
 import React from "react";
 import { View } from "react-native";
+import { useRecoilValue } from "recoil";
 
 import Text from "@/components/Text";
+import { CallingRecordLastOtherSelector } from "@/utils/states";
 
 import styles from "./styles";
 
 
 const Help = () => {
+  const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
   return (
     <View style={styles.help}>
       <Text style={styles.helpText}>이렇게 말해보세요!</Text>
-      <Text style={styles.text}>안녕하세요!{"\n"}짜장면 한 그릇 가능한가요?</Text>
+      <Text style={styles.text}>{lastOther.recommend || "로딩 중..."}</Text>
     </View>
   );
 };

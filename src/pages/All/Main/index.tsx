@@ -47,7 +47,12 @@ const Main = ({ navigation }: props) => {
     {
       type: "btn",
       name: "띠리링 설정",
-      icon: <Icon_Settings />
+      icon: <Icon_Settings />,
+      onPress: () => navigation.navigate("Alert", {
+        title: "개발 예정입니다!",
+        context: "빨리 개발을 완료하여 여러분들께 보여드리도록 하겠습니다!",
+        buttonText: "확인",
+      })
     },
     {
       type: "btn",
