@@ -3,34 +3,23 @@ import FormData from "form-data";
 import React from "react";
 import { Animated, Image, TouchableOpacity } from "react-native";
 import AudioRecorderPlayer from "react-native-audio-recorder-player";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import env from "@/../.env.json";
-import Dialogue from "@/utils/api/dialogue";
 import colors from "@/utils/colors";
-import { CallingColorSelector, CallingRecordLastMeSelector, CallingRecordSelector, CallingRecordingSelector, CallingStopSelector } from "@/utils/states";
+import { CallingColorSelector, CallingRecord, CallingRecordSelector, CallingRecordingSelector, CallingStopSelector } from "@/utils/states";
 
 import styles from "./styles";
 
 const src = "https://s3-alpha-sig.figma.com/img/26a1/9cb3/b8d724ac8074bb487ce2f0e167a5914b?Expires=1694390400&Signature=oit~3svyozE-Z4W2ZDJs966ooFUhOXVoyZrmOPjGU2gDU6kSw-rF6DR0cO4tpeQdutlZwuAdObZyg76V1D3c7xtR3zri3RWw--kGLoFlb2OYMbVXPaU0Psa-zgX95daNXWaeMhUcCqah4wAODPuB7lpNspuovByfrLRcMTe0nXsf6CJ9irq9XeH5cu3b0fItZCYW8~RrOPkaqs1q3-kAZ4HE5IrVklqz6lNOmWU77-k2xyIGo10Er9YMahTK9uvCVD4pqPoM7vm8t99DEJN8nLwNF6ANPHQXSJnuRABSC8SDkI-QCkX0wv99uEzTbMqW1-oeFeJkfdVrMjkOanLamQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4";
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
-const Main = ({
-  dialogue
-}: {
-  dialogue: Dialogue,
-}) => {
+const Main = () => {
   // const PositionAnimation = React.useRef(new Animated.Value(0)).current;
   const [color, setColor] = useRecoilState(CallingColorSelector);
   const [recording, setRecording] = useRecoilState(CallingRecordingSelector);
-  const [log, setLog] = useRecoilState(CallingRecordSelector);
+  const setLog = useSetRecoilState(CallingRecordSelector);
   const [stop, setStop] = useRecoilState(CallingStopSelector);
-  const lastMe = useRecoilValue(CallingRecordLastMeSelector);
-  
-  React.useEffect(() => {
-    if(!lastMe) return;
-    sendToGPT();
-  }, [lastMe]);
 
   React.useEffect(() => {
     if(stop) {
@@ -74,20 +63,6 @@ const Main = ({
     }
   };
 
-  const sendToGPT = async () => {
-    if(!lastMe) return;
-    const response = await dialogue.answer(lastMe);
-    if(response.error) {
-      console.error(response.error);
-      return;
-    }
-    setLog([...log, {
-      type: "other",
-      text: response.answer,
-    }]);
-    console.log(response);
-  };
-
   const onStartRecord = async () => {
     console.log("onStartRecord");
     return await audioRecorderPlayer.startRecorder();
@@ -104,7 +79,7 @@ const Main = ({
       stopAnimation();
       const url = await onStopRecord();
       const result = await getWhisper(url);
-      setLog([...log, {
+      setLog((p: CallingRecord[]) => [...p, {
         type: "me",
         text: result,
       }]);

@@ -1,5 +1,6 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Kakao from "@react-native-seoul/kakao-login";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
@@ -10,7 +11,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import "react-native-reanimated";
 import { AlertModal, ConfirmModal } from "@/components/Modals";
 import colors from "@/utils/colors";
-import { isLoginSelector, tokenAtom } from "@/utils/states";
+import { isLoginSelector, tokenAtom, userAtom } from "@/utils/states";
 
 import All from "./All";
 import Call from "./Call";
@@ -18,6 +19,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Record from "./Record";
 import { StackParamList } from "./types";
+
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -45,11 +47,22 @@ const App = () => {
     }
   }, [isLogin]);
 
+  const setUserInfo = useSetRecoilState(userAtom);
   React.useEffect(() => {
     const init = async () => {
       const accessToken = await AsyncStorage.getItem("accessToken");
       const refreshToken = await AsyncStorage.getItem("refreshToken");
-      setTokens({ accessToken, refreshToken });
+      const getKakaoAccessToken = await Kakao.getAccessToken();
+      const newAccessToken = getKakaoAccessToken.accessToken;
+      if(accessToken && accessToken !== newAccessToken) {
+        await AsyncStorage.removeItem("accessToken");
+        await AsyncStorage.setItem("accessToken", newAccessToken);
+      }
+      const getKakaoProfile = await Kakao.getProfile();
+      if(getKakaoProfile) {
+        setUserInfo(getKakaoProfile);
+      }
+      setTokens({ accessToken: newAccessToken, refreshToken });
     };
 
     init().finally(async () => {

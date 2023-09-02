@@ -1,3 +1,4 @@
+import * as Kakao from "@react-native-seoul/kakao-login";
 import { DefaultValue, atom, selector } from "recoil";
 
 import colors from "./colors";
@@ -11,6 +12,35 @@ export const tokenAtom = atom<{
     accessToken: null,
     refreshToken: null
   }
+});
+
+export const userAtom = atom<Kakao.KakaoProfile>({
+  key: "user",
+  default: {
+    "ageRange": "",
+    "ageRangeNeedsAgreement": false,
+    "birthday": "",
+    "birthdayNeedsAgreement": false,
+    "birthdayType": "",
+    "birthyear": "",
+    "birthyearNeedsAgreement": false,
+    "email": "",
+    "emailNeedsAgreement": false,
+    "gender": "",
+    "genderNeedsAgreement": false,
+    "id": "",
+    "isEmailValid": false,
+    "isEmailVerified": false,
+    "isKorean": false,
+    "isKoreanNeedsAgreement": false,
+    "name": "",
+    "nickname": "",
+    "phoneNumber": "",
+    "phoneNumberNeedsAgreement": false,
+    "profileImageUrl": "",
+    "profileNeedsAgreement": false,
+    "thumbnailImageUrl": ""
+  },
 });
 
 export const isLoginSelector = selector({
@@ -29,7 +59,7 @@ export const SizeAtom = atom({
   }
 });
 
-type CallingRecord = {
+export type CallingRecord = {
   type: "me" | "other";
   text: string;
 };

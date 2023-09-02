@@ -26,9 +26,14 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 42,
-    borderColor: colors.gray500,
+    borderColor: colors.gray100,
     borderWidth: 1,
-    backgroundColor: colors.gray500,
+    backgroundColor: colors.gray100,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
   topLeft: {
     display: "flex",
