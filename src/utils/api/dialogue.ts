@@ -1,31 +1,16 @@
 import axios from "axios";
-import { OpenAI } from "openai";
 
-import env from "@/../.env.json";
+import { IdialogueHistory } from "./interfaces/Idialogue";
+import { Authorization } from "./models/Mauthorization";
+import { Mdialogue } from "./models/Mdialogue";
 
-import { IdialogueHistory, IdialogueMessage } from "./interfaces/Idialogue";
-// import { openai } from "./modules/configure";
-
-const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY
-});
-
-class DialogueFlow {
-  dialogueMessage: IdialogueMessage[];
-  dialogueSubject: string;
-  constructor() {
-    this.dialogueMessage = [];
-    this.dialogueSubject = "";
-  }
-}
-
-export default class Dialogue extends DialogueFlow {
+export default class Dialogue extends Mdialogue {
   protected request = async (request: string) => {
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
         model: "gpt-4",
-        max_tokens: 200,
+        max_tokens: 300,
         messages: [
           {
             "role": "system",
@@ -34,55 +19,44 @@ export default class Dialogue extends DialogueFlow {
           {
             "role": "user",
             "content": request
+          },
+          {
+            "role": "assistant",
+            "content": `"user"의 대한 "assistant"의 답변과 "assistant"의 답변에 응답할 "user"의 추천 대답을 
+              {
+                response: "user의 제시문에 대한 assistant의 답변",
+                recommend: "assistant의 답변에 응답할 user의 추천 대답"
+              }
+              형식의 json 형태로 답변하시오
+            `
           }
         ]
       },
       {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + env.OPENAI_API_KEY
-        }
+        headers: Authorization
       }
     );
     return response.data;
-    // return await openai.chat.completions.create({
-    //   model: "gpt-4",
-    //   max_tokens: 200,
-    //   messages: [
-    //     {
-    //       "role": "system",
-    //       "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
-    //     },
-    //     {
-    //       "role": "user",
-    //       "content": request
-    //     }
-    //   ]
-    // });
   };
   /**입력받은 문자열에 대해 GPT-4가 답변한 문자열 반환 */
   answer = async (request: string) => {
-    if(!this.checkSubject()) return {
-      "error": "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.",
-      "answer": "",
-      "recommend": ""
-    };
+    if(!this.checkSubject()) return "등록된 주제가 없습니다. 대화를 시작하기 위해 주제를 등록해 주세요.";
     this.dialogueMessage.push({
       index: this.dialogueMessage.length,
       role: "user",
-      message: request
+      message: request,
+      recommend: ""
     });
     return this.request(request).then(response => {
+      const result = JSON.parse(response.choices[0].message.content);
       this.dialogueMessage.push({
         index: this.dialogueMessage.length,
         role: response.choices[0].message.role,
-        message: response.choices[0].message.content
+        message: result.response,
+        recommend: result.recommend
       });
-      return {
-        "error": "",
-        "answer": response.choices[0].message.content as string,
-        "recommend": ""
-      };
+      return result;
+      // return response.choices[0].message.content;
     }); 
   };
   /**대화기록 열람 */
@@ -106,5 +80,3 @@ export default class Dialogue extends DialogueFlow {
     super();
   }
 }
-
-

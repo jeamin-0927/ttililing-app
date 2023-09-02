@@ -6,5 +6,6 @@ export interface IdialogueHistory {
 export interface IdialogueMessage {
     index: number,
     role: string,
-    message: string | null
+    message: string,
+    recommend: string
 }
