@@ -1,4 +1,3 @@
-import { BlurView } from "@react-native-community/blur";
 import React from "react";
 import { Image, Platform, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import colors, { opacity } from "@/utils/colors";
+import colors from "@/utils/colors";
 import fonts from "@/utils/fonts";
 
 export default StyleSheet.create({
