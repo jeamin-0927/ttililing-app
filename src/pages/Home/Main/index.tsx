@@ -1,19 +1,20 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Kakao from "@react-native-seoul/kakao-login";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Image, SafeAreaView, TouchableOpacity, View } from "react-native";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import Icon_Check from "@/assets/icons/check.svg";
 import Icon_Close from "@/assets/icons/close.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
 import colors from "@/utils/colors";
-import { userAtom } from "@/utils/states";
+import { tokenAtom, userAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
 import styles from "./styles";
-
 
 
 const Icons = ({ type }: {
@@ -31,7 +32,29 @@ const Icons = ({ type }: {
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
-  const userInfo = useRecoilValue(userAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userAtom);
+  const setTokens = useSetRecoilState(tokenAtom);
+
+  const init = async () => {
+    const accessToken = await AsyncStorage.getItem("accessToken");
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
+    const getKakaoAccessToken = await Kakao.getAccessToken();
+    const newAccessToken = getKakaoAccessToken.accessToken;
+    if(accessToken && accessToken !== newAccessToken) {
+      await AsyncStorage.removeItem("accessToken");
+      await AsyncStorage.setItem("accessToken", newAccessToken);
+    }
+    const getKakaoProfile = await Kakao.getProfile();
+    if(getKakaoProfile) {
+      setUserInfo(getKakaoProfile);
+    }
+    setTokens({ accessToken: newAccessToken, refreshToken });
+  };
+
+  React.useEffect(() => {
+    init();
+  }, []);
+  // navigation.addListener("focus", init);
   
   return (
     <SafeAreaView style={styles.SafeAreaView}>

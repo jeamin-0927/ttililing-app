@@ -48,23 +48,26 @@ const App = () => {
   }, [isLogin]);
 
   const setUserInfo = useSetRecoilState(userAtom);
-  React.useEffect(() => {
-    const init = async () => {
-      const accessToken = await AsyncStorage.getItem("accessToken");
-      const refreshToken = await AsyncStorage.getItem("refreshToken");
-      const getKakaoAccessToken = await Kakao.getAccessToken();
-      const newAccessToken = getKakaoAccessToken.accessToken;
-      if(accessToken && accessToken !== newAccessToken) {
-        await AsyncStorage.removeItem("accessToken");
-        await AsyncStorage.setItem("accessToken", newAccessToken);
-      }
-      const getKakaoProfile = await Kakao.getProfile();
-      if(getKakaoProfile) {
-        setUserInfo(getKakaoProfile);
-      }
-      setTokens({ accessToken: newAccessToken, refreshToken });
-    };
+  const init = async () => {
+    const accessToken = await AsyncStorage.getItem("accessToken");
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
+    const getKakaoAccessToken = await Kakao.getAccessToken();
+    const newAccessToken = getKakaoAccessToken.accessToken;
+    if(accessToken && accessToken !== newAccessToken) {
+      await AsyncStorage.removeItem("accessToken");
+      await AsyncStorage.setItem("accessToken", newAccessToken);
+    }
+    const getKakaoProfile = await Kakao.getProfile();
+    if(getKakaoProfile) {
+      setUserInfo(getKakaoProfile);
+    }
+    setTokens({ accessToken: newAccessToken, refreshToken });
+  };
 
+  
+
+  React.useEffect(() => {
+    init();
     init().finally(async () => {
       await BootSplash.hide({ fade: true });
     });
