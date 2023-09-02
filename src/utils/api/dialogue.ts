@@ -1,14 +1,8 @@
 import axios from "axios";
-import { OpenAI } from "openai";
 
 import env from "@/../.env.json";
 
 import { IdialogueHistory, IdialogueMessage } from "./interfaces/Idialogue";
-// import { openai } from "./modules/configure";
-
-const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY
-});
 
 class DialogueFlow {
   dialogueMessage: IdialogueMessage[];
@@ -24,8 +18,7 @@ export default class Dialogue extends DialogueFlow {
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
-        model: "gpt-4",
-        max_tokens: 200,
+        model: "gpt-3.5-turbo",
         messages: [
           {
             "role": "system",
@@ -45,20 +38,6 @@ export default class Dialogue extends DialogueFlow {
       }
     );
     return response.data;
-    // return await openai.chat.completions.create({
-    //   model: "gpt-4",
-    //   max_tokens: 200,
-    //   messages: [
-    //     {
-    //       "role": "system",
-    //       "content": `상황 : ${this.dialogueSubject}\n대화 내역 : ${this.dialogueMessage.toString()}`
-    //     },
-    //     {
-    //       "role": "user",
-    //       "content": request
-    //     }
-    //   ]
-    // });
   };
   /**입력받은 문자열에 대해 GPT-4가 답변한 문자열 반환 */
   answer = async (request: string) => {
