@@ -39,7 +39,8 @@ const Main = ({ navigation }: props) => {
     {
       type: "btn",
       name: "내 정보",
-      icon: <Icon_Myinfo />
+      icon: <Icon_Myinfo />,
+      onPress: () => navigation.navigate("Mypage")
     },
     {
       type: "btn",

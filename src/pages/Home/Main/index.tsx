@@ -1,15 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { SafeAreaView, TouchableOpacity, View } from "react-native";
-import { useSetRecoilState } from "recoil";
+import { Image, SafeAreaView, TouchableOpacity, View } from "react-native";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import Icon_Check from "@/assets/icons/check.svg";
 import Icon_Close from "@/assets/icons/close.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
 import colors from "@/utils/colors";
-import { tokenAtom } from "@/utils/states";
+import { tokenAtom, userAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
@@ -32,29 +32,15 @@ const Icons = ({ type }: {
 
 type props = NativeStackScreenProps<ParentsStackParamList, "Main">;
 const Main = ({ navigation }: props) => {
-  const setTokens = useSetRecoilState(tokenAtom);
-
-  const onPress = async () => {
-    navigation.navigate("Confirm", {
-      title: "로그아웃 하시겠습니까?",
-      context: "로그아웃 시, 저장된 토큰이 삭제됩니다.",
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-      onConfirm: async () => {
-        await AsyncStorage.removeItem("accessToken");
-        await AsyncStorage.removeItem("refreshToken");
-        setTokens({ accessToken: null, refreshToken: null });
-      }
-    });
-  };
-
+  const userInfo = useRecoilValue(userAtom);
+  
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.top}>
         <View style={styles.topLeft}>
           <Text style={styles.iconText}>📞</Text>
           <View style={styles.topNames}>
-            <Text style={styles.topName}>{"재민"}의 띠리링</Text>
+            <Text style={styles.topName}>{userInfo.nickname}의 띠리링</Text>
             <Text style={styles.topNumber}>총 전화시간 {"19:00:21"}</Text>
           </View>
         </View>
@@ -63,6 +49,7 @@ const Main = ({ navigation }: props) => {
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           onPress={() => navigation.navigate("All")}
         >
+          <Image source={{ uri: userInfo.profileImageUrl }} style={styles.image} />
         </TouchableOpacity>
       </View>
 

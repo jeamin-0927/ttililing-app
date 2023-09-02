@@ -5,6 +5,7 @@ import { StackParamList as ParentsStackParamList } from "../types";
 
 import Appinfo from "./Appinfo";
 import Main from "./Main";
+import Mypage from "./Mypage";
 import OpenSource from "./OpenSource";
 import { StackParamList } from "./types";
 
@@ -23,6 +24,7 @@ const All = ({ navigation }: props) => {
       <Stack.Group>
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="Appinfo" component={Appinfo} />
+        <Stack.Screen name="Mypage" component={Mypage} />
       </Stack.Group>
       <Stack.Group screenOptions={{
         headerShown: false,

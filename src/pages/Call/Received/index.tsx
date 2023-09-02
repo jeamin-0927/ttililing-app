@@ -17,7 +17,7 @@ import CallView from "@/components/CallView";
 import Text from "@/components/Text";
 import Dialogue from "@/utils/api/dialogue";
 import random from "@/utils/random";
-import { CallingRecordLastOtherSelector, CallingRecordSelector, CallingStopSelector } from "@/utils/states";
+import { CallingRecord, CallingRecordLastMeSelector, CallingRecordLastOtherSelector, CallingRecordSelector, CallingStopSelector } from "@/utils/states";
 import voices from "@/utils/voices";
 
 import { StackParamList as ParentsStackParamList } from "../types";
@@ -70,10 +70,13 @@ const Received = ({ navigation, route }: props) => {
     help: false,
   });
   const [dialogue, setDialogue] = React.useState(new Dialogue());
-  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main dialogue={dialogue} />);
+  const [Center, setCenter] = React.useState<React.JSX.Element>(<Main />);
   const [voice, setVoice] = React.useState(voices[0]);
   const resetLog = useResetRecoilState(CallingRecordSelector);
   const lastOther = useRecoilValue(CallingRecordLastOtherSelector);
+  const lastMe = useRecoilValue(CallingRecordLastMeSelector);
+  const setLog = useSetRecoilState(CallingRecordSelector);
+  
   const stopVoice = useSetRecoilState(CallingStopSelector);
 
   const init = () => {
@@ -96,6 +99,27 @@ const Received = ({ navigation, route }: props) => {
     };
   }, []);
 
+
+  const sendToGPT = async () => {
+    if(!lastMe) return;
+    dialogue.setSubject(topic);
+    const response = await dialogue.answer(lastMe);
+    if(response.error) {
+      console.error(response.error);
+      return;
+    }
+    setLog((p: CallingRecord[]) => [...p, {
+      type: "other",
+      text: response.answer,
+    }]);
+    console.log(response);
+  };
+
+  React.useEffect(() => {
+    console.log("lastMe changed", lastMe);
+    if(!lastMe) return;
+    sendToGPT();
+  }, [lastMe]);
 
   const TTS = async () => {
     if(!lastOther) return;
@@ -152,7 +176,7 @@ const Received = ({ navigation, route }: props) => {
       changePage(<Help />);
     }
     else {
-      changePage(<Main dialogue={dialogue} />);
+      changePage(<Main />);
     }
   }, [ClickBtn.record, ClickBtn.help]);
 

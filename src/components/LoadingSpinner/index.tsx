@@ -1,7 +1,5 @@
-import MaskedView from "@react-native-masked-view/masked-view";
 import React from "react";
 import { Animated, View } from "react-native";
-import { Path, Svg } from "react-native-svg";
 
 import Icon_Loading from "@/assets/icons/loading.svg";
 import Icon_LoadingNoFill from "@/assets/icons/loading_nofill.svg";
@@ -16,6 +14,11 @@ const LoadingSpinner = ({ show }: {
   const animation = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
+    Animated.timing(animation, {
+      toValue: 0,
+      duration: 0,
+      useNativeDriver: false
+    }).start();
     const anim = setInterval(() => {
       Animated.sequence([
         Animated.timing(animation, {
