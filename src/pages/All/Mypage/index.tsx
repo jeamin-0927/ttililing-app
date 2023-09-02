@@ -13,7 +13,6 @@ import { StackParamList as ParentsStackParamList } from "../types";
 
 import styles from "./styles";
 
-
 type props = NativeStackScreenProps<ParentsStackParamList, "Mypage">;
 const Mypage = ({ navigation }: props) => {
   const [userInfo, setUserInfo] = useRecoilState(userAtom);

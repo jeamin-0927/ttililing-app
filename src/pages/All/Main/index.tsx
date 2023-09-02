@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Kakao from "@react-native-seoul/kakao-login";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView, TouchableOpacity, View } from "react-native";
@@ -31,6 +32,7 @@ const Main = ({ navigation }: props) => {
         await AsyncStorage.removeItem("accessToken");
         await AsyncStorage.removeItem("refreshToken");
         setTokens({ accessToken: null, refreshToken: null });
+        await Kakao.logout();
       }
     });
   };

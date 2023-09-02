@@ -1,15 +1,14 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Image, SafeAreaView, TouchableOpacity, View } from "react-native";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Icon_Check from "@/assets/icons/check.svg";
 import Icon_Close from "@/assets/icons/close.svg";
 import Menu from "@/components/Menu";
 import Text from "@/components/Text";
 import colors from "@/utils/colors";
-import { tokenAtom, userAtom } from "@/utils/states";
+import { userAtom } from "@/utils/states";
 
 import { StackParamList as ParentsStackParamList } from "../types";
 
