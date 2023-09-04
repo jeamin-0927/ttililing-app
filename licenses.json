@@ -60,12 +60,6 @@
     "homepage": "git://github.com/form-data/form-data.git"
   },
   {
-    "license": "Apache-2.0",
-    "name": "openai",
-    "description": "Client library for the OpenAI API",
-    "homepage": "github:openai/openai-node"
-  },
-  {
     "license": "BSD",
     "name": "packages",
     "description": "node-packages is [require.js](http://requirejs.org/) for node.js.",

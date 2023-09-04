@@ -1,79 +1,68 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 띠리링 - 전화 공포증 극복을 위한 AI 기반 통화 트레이닝 애플리케이션
 
-# Getting Started
+![띠리링 로고](https://raw.githubusercontent.com/jeamin-0927/ttililing-app/main/src/assets/icons/icon.svg)
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## 소개
 
-## Step 1: Start the Metro Server
+띠리링은 전화 공포증을 겪는 사용자들을 위한 AI 기반 통화 트레이닝 애플리케이션입니다. 전화 공포증은 최근 청년층을 중심으로 증가하는 문제로, 전화를 걸거나 통화할 때 불안감과 불편함을 겪는 현상입니다. 띠리링은 사용자가 생생한 통화 시뮬레이션 경험을 할 수 있도록 도와주며, 사용자의 통화 기록을 피드백으로 활용하여 개선을 돕고, AI를 기반으로 한 다양한 상황의 맞춤 통화를 지원합니다.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 개발 목표 및 내용
 
-To start Metro, run the following command from the _root_ of your React Native project:
+띠리링의 주요 개발 목표는 다음과 같습니다:
 
-```bash
-# using npm
-npm start
+1. 사용자의 생동감 있는 통화 시뮬레이션 경험 제공
+2. 사용자의 통화 기록을 통한 피드백 효과 제공
+3. AI를 활용하여 확장 가능한 다양한 상황의 맞춤 통화 제공
 
-# OR using Yarn
-yarn start
-```
+## 기능 및 기술 스택
 
-## Step 2: Start your Application
+### 프론트 엔드 개발 내용
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- 홈 화면: 사용자의 데이터 시각화, 오늘의 전화 미션 제공
+- 전화하기 화면: 전화 미션 및 주제 제공, 맞춤형 대화 주제 설정
+- 전화 화면: AI 기반으로 상대방의 이름과 사진 생성 (Dall-E 활용), 음성인식 및 GPT를 통한 자동 대화 생성, 대화 기록 및 TTS로 음성 출력
+- 도와주세요 버튼: 대화 기록을 바탕으로 자연스러운 문장 추천
+- 대화 기록 화면: 대화 기록을 전화 건 별로 열람
 
-### For Android
+### 백 엔드 개발 내용
 
-```bash
-# using npm
-npm run android
+- 사용자 데이터 관리
+- 음성인식 기능 (Whisper) 활용
+- GPT-4를 활용한 자동 대화 생성
+- 통화 기록 관리 및 저장
 
-# OR using Yarn
-yarn android
-```
+## 기대 효과 및 활용 방안
 
-### For iOS
+띠리링을 통해 다음과 같은 기대 효과를 얻을 수 있습니다:
 
-```bash
-# using npm
-npm run ios
+1. 전화 공포증 증상 완화: 전화 공포증을 겪는 사람들을 도와 통화에 대한 불안감을 극복할 수 있습니다.
+2. 대화 습관 개선: 일상 생활 속에서도 효과적인 대화 습관을 형성하고 개선할 수 있습니다.
+3. 세대 간 의사소통 개선: MZ세대 등 다양한 세대 간의 의사소통을 개선하는데 기여할 수 있습니다.
 
-# OR using Yarn
-yarn ios
-```
+## 시장 분석 및 차별화 전략
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+- 메신저 이용률 증가 및 전화 공포증 환자 증가 추세
+- 띠리링은 무료로 제공되며 간편한 모바일 애플리케이션으로 사용 가능
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## 비즈니스 모델
 
-## Step 3: Modifying your App
+- 모바일 앱 광고
+- 부분 유료화 (AI 피드백 기능 등)
 
-Now that you have successfully run the app, let's modify it.
+## 설치 및 사용 방법
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+1. [애플리케이션 다운로드 링크](https://drive.google.com/drive/folders/1gIiSO07tSp8p-nDHHG2J38wUsiV1pOAP?usp=share_link)에서 애플리케이션을 다운로드합니다.
+2. 애플리케이션을 설치한 후 로그인을 합니다.
+3. 홈 화면에서 오늘의 전화 미션을 확인하고 전화하기 화면에서 대화 주제를 선택하여 통화 트레이닝을 시작합니다.
+4. 전화 화면에서 AI와 대화하며 통화를 진행하고 피드백을 받습니다.
+5. 대화 기록 화면에서 과거 대화 내용을 확인하고 개선 방안을 찾아냅니다.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## 문의 및 지원
 
-## Congratulations! :tada:
+띠리링에 관한 문의나 지원이 필요한 경우 아래의 연락처로 문의해주세요:
 
-You've successfully run and modified your React Native App. :partying_face:
+- 이메일: admin@chicken-moo.com
+- 전화번호: 010-9506-2709
 
-### Now what?
+띠리링 애플리케이션을 통해 편안하고 자신감 있는 통화 습관을 개선하세요!
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
