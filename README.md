@@ -1,68 +1,67 @@
-# 띠리링 - 전화 공포증 극복을 위한 AI 기반 통화 트레이닝 애플리케이션
+# Ttililing - AI-Based Call Training Application for Overcoming Phone Phobia
 
-![띠리링 로고](https://raw.githubusercontent.com/jeamin-0927/ttililing-app/main/src/assets/icons/icon.svg)
+![Ttililing Logo](https://raw.githubusercontent.com/jeamin-0927/ttililing-app/main/src/assets/icons/icon.svg)
 
-## 소개
+## Introduction
 
-띠리링은 전화 공포증을 겪는 사용자들을 위한 AI 기반 통화 트레이닝 애플리케이션입니다. 전화 공포증은 최근 청년층을 중심으로 증가하는 문제로, 전화를 걸거나 통화할 때 불안감과 불편함을 겪는 현상입니다. 띠리링은 사용자가 생생한 통화 시뮬레이션 경험을 할 수 있도록 도와주며, 사용자의 통화 기록을 피드백으로 활용하여 개선을 돕고, AI를 기반으로 한 다양한 상황의 맞춤 통화를 지원합니다.
+Ttililing is an AI-based call training application designed for users who experience phone phobia. Phone phobia is a growing issue, especially among young adults, where individuals feel anxiety and discomfort when making or receiving phone calls. Ttililing assists users in experiencing vivid call simulation, utilizes their call records for feedback, and supports personalized conversations for various situations based on AI.
 
-## 개발 목표 및 내용
+## Development Goals and Content
 
-띠리링의 주요 개발 목표는 다음과 같습니다:
+The main development goals of Ttililing are as follows:
 
-1. 사용자의 생동감 있는 통화 시뮬레이션 경험 제공
-2. 사용자의 통화 기록을 통한 피드백 효과 제공
-3. AI를 활용하여 확장 가능한 다양한 상황의 맞춤 통화 제공
+1. Providing users with immersive call simulation experiences
+2. Offering feedback through user call records
+3. Providing personalized conversations for diverse scenarios using AI
 
-## 기능 및 기술 스택
+## Features and Technology Stack
 
-### 프론트 엔드 개발 내용
+### Front-End Development Contents
 
-- 홈 화면: 사용자의 데이터 시각화, 오늘의 전화 미션 제공
-- 전화하기 화면: 전화 미션 및 주제 제공, 맞춤형 대화 주제 설정
-- 전화 화면: AI 기반으로 상대방의 이름과 사진 생성 (Dall-E 활용), 음성인식 및 GPT를 통한 자동 대화 생성, 대화 기록 및 TTS로 음성 출력
-- 도와주세요 버튼: 대화 기록을 바탕으로 자연스러운 문장 추천
-- 대화 기록 화면: 대화 기록을 전화 건 별로 열람
+- Home Screen: Visualizing user data, providing today's call missions
+- Call Screen: Offering call missions and topics, setting custom conversation topics
+- Phone Call Screen: AI-generated contact name and image (utilizing Dall-E), automatic conversation generation through voice recognition and GPT, conversation logging, and speech output through TTS
+- Help Button: Recommending natural sentences based on conversation records
+- Conversation Record Screen: Viewing conversation records for each call made
 
-### 백 엔드 개발 내용
+### Back-End Development Contents
 
-- 사용자 데이터 관리
-- 음성인식 기능 (Whisper) 활용
-- GPT-4를 활용한 자동 대화 생성
-- 통화 기록 관리 및 저장
+- User data management
+- Utilizing voice recognition functionality (Whisper)
+- Automatic conversation generation using GPT-4
+- Call record management and storage
 
-## 기대 효과 및 활용 방안
+## Expected Benefits and Utilization
 
-띠리링을 통해 다음과 같은 기대 효과를 얻을 수 있습니다:
+Ttililing can provide the following expected benefits:
 
-1. 전화 공포증 증상 완화: 전화 공포증을 겪는 사람들을 도와 통화에 대한 불안감을 극복할 수 있습니다.
-2. 대화 습관 개선: 일상 생활 속에서도 효과적인 대화 습관을 형성하고 개선할 수 있습니다.
-3. 세대 간 의사소통 개선: MZ세대 등 다양한 세대 간의 의사소통을 개선하는데 기여할 수 있습니다.
+1. Alleviation of Phone Phobia Symptoms: Assisting individuals with phone phobia in overcoming anxiety related to phone calls.
+2. Improvement of Conversation Habits: Forming and enhancing effective conversation habits in everyday life.
+3. Enhancing Intergenerational Communication: Contributing to improved communication between different generations, including the Millennial and Generation Z cohorts.
 
-## 시장 분석 및 차별화 전략
+## Market Analysis and Differentiation Strategy
 
-- 메신저 이용률 증가 및 전화 공포증 환자 증가 추세
-- 띠리링은 무료로 제공되며 간편한 모바일 애플리케이션으로 사용 가능
+- Increasing usage of messaging apps and a rising trend in phone phobia cases
+- Ttililing is offered for free as a user-friendly mobile application
 
-## 비즈니스 모델
+## Business Model
 
-- 모바일 앱 광고
-- 부분 유료화 (AI 피드백 기능 등)
+- Mobile app advertising
+- Partial monetization (AI feedback functionality, etc.)
 
-## 설치 및 사용 방법
+## Installation and Usage Instructions
 
-1. [애플리케이션 다운로드 링크](https://drive.google.com/drive/folders/1gIiSO07tSp8p-nDHHG2J38wUsiV1pOAP?usp=share_link)에서 애플리케이션을 다운로드합니다.
-2. 애플리케이션을 설치한 후 로그인을 합니다.
-3. 홈 화면에서 오늘의 전화 미션을 확인하고 전화하기 화면에서 대화 주제를 선택하여 통화 트레이닝을 시작합니다.
-4. 전화 화면에서 AI와 대화하며 통화를 진행하고 피드백을 받습니다.
-5. 대화 기록 화면에서 과거 대화 내용을 확인하고 개선 방안을 찾아냅니다.
+1. Download the application from the [application download link](https://drive.google.com/drive/folders/1gIiSO07tSp8p-nDHHG2J38wUsiV1pOAP?usp=share_link).
+2. Install the application and proceed with the login.
+3. Check today's call mission on the home screen, select conversation topics on the call screen, and begin call training.
+4. Engage in conversations with AI on the call screen, receive feedback during the call, and after.
+5. View past conversation records and identify areas for improvement on the conversation record screen.
 
-## 문의 및 지원
+## Contact and Support
 
-띠리링에 관한 문의나 지원이 필요한 경우 아래의 연락처로 문의해주세요:
+For inquiries or assistance related to Ttililing, please contact us at the following:
 
-- 이메일: admin@chicken-moo.com
-- 전화번호: 010-9506-2709
+- Email: admin@chicken-moo.com
+- Phone: 010-9506-2709
 
-띠리링 애플리케이션을 통해 편안하고 자신감 있는 통화 습관을 개선하세요!
-
+Improve your comfort and confidence in conversation habits through the Ttililing application!
